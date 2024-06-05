@@ -17,6 +17,8 @@ const Login = () => {
   const { logIn, googleLogin, githubLogin } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  console.log(from);
 
   const {
     register,
@@ -39,7 +41,7 @@ const Login = () => {
       .then((result) => {
         setLoginError("");
         console.log("Login", result);
-        navigate(location?.state || "/");
+        navigate(from, { replace: true });
         Swal.fire({
           title: result?.user?.displayName || "Sweet!",
           text: "User Login Successfully",
@@ -61,7 +63,7 @@ const Login = () => {
     googleLogin()
       .then((result) => {
         console.log("Google Login", result);
-        navigate(location?.state ? location.state : "/");
+        navigate(from, { replace: true });
         toast.success("Login Successful");
       })
       .catch((error) => console.log(error));
@@ -70,7 +72,7 @@ const Login = () => {
     githubLogin()
       .then((result) => {
         console.log("Github Login", result);
-        navigate(location?.state ? location.state : "/");
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };

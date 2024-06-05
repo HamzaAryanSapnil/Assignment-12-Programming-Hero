@@ -1,15 +1,19 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
+import Swal from "sweetalert2";
 const Register = () => {
   const [showPass, setShowPass] = useState(true);
   const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors },
   } = useForm({
@@ -32,7 +36,12 @@ const Register = () => {
         updateUserProfile(name, photoUrl)
           .then(() => {
             console.log("profile updated");
-            navigate("/");
+            reset();
+            Swal.fire({
+              title: "User Created Successfully",
+              icon: "success",
+            });
+            navigate(from, { replace: true });
           })
           .catch((error) => {
             console.error(error);

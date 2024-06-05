@@ -21,13 +21,16 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
-        <NavLink to="/all_foods">Community</NavLink>
+        <NavLink to="/community">Community</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
-        <NavLink to="/food_gallery">Blogs</NavLink>
+        <NavLink to="/blogs">Blogs</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
-        <NavLink to="/food_gallery">About Us</NavLink>
+        <NavLink to="/about_us">About Us</NavLink>
+      </li>
+      <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
+        <NavLink to="/secret">Secret</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/food_gallery"> Contact Us</NavLink>
