@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "image": "https://via.placeholder.com/150",
+        "tourType": "Adventure",
+        "title": "Thrilling Safari",
+        "price": "$500",
+        "description": "Experience the thrill of a safari in the wilderness."
+    },
+    {
+        "id": 2,
+        "image": "https://via.placeholder.com/150",
+        "tourType": "Cultural",
+        "title": "Cultural Tour",
+        "price": "$300",
+        "description": "Dive into the rich culture and heritage of Bangladesh."
+    },
+    {
+        "id": 3,
+        "image": "https://via.placeholder.com/150",
+        "tourType": "Relaxation",
+        "title": "Beach Relaxation",
+        "price": "$400",
+        "description": "Relax on the beautiful beaches of Bangladesh."
+    },
+    {
+        "id": 4,
+        "image": "https://via.placeholder.com/150",
+        "tourType": "Historical",
+        "title": "Historical Landmarks",
+        "price": "$350",
+        "description": "Visit the historical landmarks and learn about the history of Bangladesh."
+    },
+    {
+        "id": 5,
+        "image": "https://via.placeholder.com/150",
+        "tourType": "Nature",
+        "title": "Nature Walk",
+        "price": "$200",
+        "description": "Enjoy a peaceful walk through the natural landscapes of Bangladesh."
+    },
+    {
+        "id": 6,
+        "image": "https://via.placeholder.com/150",
+        "tourType": "Adventure",
+        "title": "Mountain Hiking",
+        "price": "$600",
+        "description": "Challenge yourself with a hike through the beautiful mountains."
+    }
+]
