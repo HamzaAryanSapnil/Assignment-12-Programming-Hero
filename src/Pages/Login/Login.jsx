@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 import { HiEyeOff } from "react-icons/hi";
 import { HiEye } from "react-icons/hi";
+import Swal from "sweetalert2";
 const Login = () => {
   const [showPass, setShowPass] = useState(true);
   const [loginError, setLoginError] = useState("");
@@ -38,8 +39,14 @@ const Login = () => {
         setLoginError("");
         console.log("Login", result);
         navigate(location?.state ? location.state : "/");
-        resetField("email");
-        resetField("password");
+        Swal.fire({
+          title: "Sweet!",
+          text: "Modal with a custom image.",
+          imageUrl: "https://unsplash.it/400/200",
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
       })
       .catch((error) => {
         setLoginError(error.message);
