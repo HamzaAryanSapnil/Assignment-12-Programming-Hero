@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 const Register = () => {
   const [showPass, setShowPass] = useState(true);
   const { createUser, updateUserProfile } = useAuth();
@@ -44,6 +45,9 @@ const Register = () => {
 
   return (
     <div className="hero min-h-screen bg-base-200">
+      <Helmet>
+        <title>Register</title>
+      </Helmet>
       <div className="hero-content flex-col lg:flex-row">
         <div className="w-1/2 mr-12 ">
           <img alt="" />
