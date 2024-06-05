@@ -22,12 +22,15 @@ const AdminNavbar = () => {
           <NavLink to="/">Home</NavLink>
         </li>
         <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
+          <NavLink to="/admin">Admin</NavLink>
+        </li>
+        <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
           <NavLink to="/my_profile">My Profile</NavLink>
         </li>
         <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
           <NavLink to="add_packages">Add Packages</NavLink>
         </li>
-       
+
         <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
           <NavLink to="/manage_users">Manage Users</NavLink>
         </li>
