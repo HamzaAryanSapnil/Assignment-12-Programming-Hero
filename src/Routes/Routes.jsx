@@ -8,6 +8,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import Secrec from "../Pages/Secrec";
 import AdminDashboard from "../Pages/Admin/Admin_Dashboard/AdminDashboard";
 import AdminLayout from "../Layout/Admin_Layout/AdminLayout";
+import AddPackages from "../Pages/Admin/Admin_Pages/Add_Packages/AddPackages";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +48,15 @@ export const router = createBrowserRouter([
             <AdminDashboard />
           </PrivateRoutes>
         ),
-      }
-    ]
-  }
+      },
+      {
+        path: "add_packages",
+        element: (
+          <PrivateRoutes>
+            <AddPackages></AddPackages>
+          </PrivateRoutes>
+        ),
+      },
+    ],
+  },
 ]);

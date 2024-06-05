@@ -25,7 +25,7 @@ const AdminNavbar = () => {
           <NavLink to="/my_profile">My Profile</NavLink>
         </li>
         <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
-          <NavLink to="/add_packages">Add Packages</NavLink>
+          <NavLink to="add_packages">Add Packages</NavLink>
         </li>
        
         <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
@@ -35,7 +35,7 @@ const AdminNavbar = () => {
     );
     return (
       <div className=" z-10  ">
-        <div className="navbar fixed z-10 bg-black bg-opacity-70 font-mulish text-white h-28">
+        <div className="navbar  z-10 bg-base-300  font-mulish  h-28">
           <div className="navbar-start">
             <div className="dropdown">
               <div

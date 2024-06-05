@@ -4,6 +4,7 @@ import AdminNavbar from "../../Pages/Admin/Admin_Navbar/AdminNavbar";
 
 
 const AdminLayout = () => {
+    
     return (
         <div>
             <AdminNavbar></AdminNavbar>
