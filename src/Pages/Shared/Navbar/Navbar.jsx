@@ -27,6 +27,9 @@ const Navbar = () => {
         <NavLink to="/blogs">Blogs</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
+        <NavLink to="/admin_dashboard">Admin Dashboard</NavLink>
+      </li>
+      <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/about_us">About Us</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
@@ -81,10 +84,7 @@ const Navbar = () => {
         </div>
         {user ? (
           <div className="navbar-end md:mr-4">
-            {/* here in this img if i click i will see a dropdown comes down in the dropdown there will be there will be three routes:
- 1. Myaddedfooditems
- 2. Addafooditem
- 3. Myorderedfooditems */}
+           
             <div className="inline-block relative dropdown dropdown-hover  dropdown-left ">
               <div
                 tabIndex={0}
