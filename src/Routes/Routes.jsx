@@ -6,6 +6,8 @@ import Register from "../Pages/Register/Register";
 
 import PrivateRoutes from "./PrivateRoutes";
 import Secrec from "../Pages/Secrec";
+import AdminDashboard from "../Pages/Admin/Admin_Dashboard/AdminDashboard";
+import AdminLayout from "../Layout/Admin_Layout/AdminLayout";
 
 export const router = createBrowserRouter([
   {
@@ -14,10 +16,6 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/admin_dashboard",
         element: <Home />,
       },
       {
@@ -38,4 +36,18 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "/admin",
+        element: (
+          <PrivateRoutes>
+            <AdminDashboard />
+          </PrivateRoutes>
+        ),
+      }
+    ]
+  }
 ]);

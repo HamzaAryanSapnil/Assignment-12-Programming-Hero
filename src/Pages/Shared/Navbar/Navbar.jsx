@@ -27,7 +27,7 @@ const Navbar = () => {
         <NavLink to="/blogs">Blogs</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
-        <NavLink to="/admin_dashboard">Admin Dashboard</NavLink>
+        <NavLink to="/admin">Admin</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/about_us">About Us</NavLink>
