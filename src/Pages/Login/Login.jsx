@@ -1,14 +1,16 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import googleIcon from '../../assets/3d-fluency-google-logo.png'
-import githubIcon from '../../assets/github.png'
+import googleIcon from "../../assets/3d-fluency-google-logo.png";
+import githubIcon from "../../assets/github.png";
 import { AuthContext } from "../../Auth_Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 import { HiEyeOff } from "react-icons/hi";
 import { HiEye } from "react-icons/hi";
 import Swal from "sweetalert2";
+// import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 const Login = () => {
   const [showPass, setShowPass] = useState(true);
   const [loginError, setLoginError] = useState("");
@@ -20,16 +22,15 @@ const Login = () => {
     register,
     handleSubmit,
     watch,
-    resetField,
     formState: { errors },
   } = useForm();
 
   console.log(errors);
   if (errors?.email) {
-    toast.error(errors.email?.message)
+    toast.error(errors.email?.message);
   }
   if (errors?.password) {
-    toast.error(errors.password?.message)
+    toast.error(errors.password?.message);
   }
   const onSubmit = (data) => {
     console.log(data);
@@ -38,14 +39,15 @@ const Login = () => {
       .then((result) => {
         setLoginError("");
         console.log("Login", result);
-        navigate(location?.state ? location.state : "/");
+        navigate(location?.state || "/");
         Swal.fire({
-          title: "Sweet!",
-          text: "Modal with a custom image.",
-          imageUrl: "https://unsplash.it/400/200",
+          title: result?.user?.displayName || "Sweet!",
+          text: "User Login Successfully",
+          imageUrl: result?.user?.photoURL || "https://unsplash.it/400/200",
           imageWidth: 400,
           imageHeight: 200,
           imageAlt: "Custom image",
+          imageClass: "rounded-circle",
         });
       })
       .catch((error) => {
@@ -123,7 +125,7 @@ const Login = () => {
                         value: true,
                         message: "password field is required",
                       },
-                    
+
                       validate: (value) => {
                         if (value.length < 8) {
                           return "Password must have at least 8 characters";
