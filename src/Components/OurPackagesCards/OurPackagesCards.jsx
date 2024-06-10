@@ -6,15 +6,17 @@ const OurPackagesCards = ({ item }) => {
       <div className="card w-96 bg-base-100 shadow-xl">
         <figure>
           <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            src={ item?.image || "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"}
             alt="Shoes"
+            className="w-full h-64"
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <h2 className="card-title">{ item?.tourType }</h2>
+          <h2 className="card-title">{ item?.title }</h2>
+          <p>{ item?.price } tk</p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
+            <button className="btn btn-primary">Book Now</button>
           </div>
         </div>
       </div>

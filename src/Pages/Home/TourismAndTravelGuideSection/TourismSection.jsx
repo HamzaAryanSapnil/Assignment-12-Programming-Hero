@@ -10,7 +10,12 @@ const TourismSection = () => {
   const handleToggleTabs = (index) => {
     setToggleTabs(index);
   };
-  return (
+  return loading ? (
+    <div className="flex justify-center items-center min-h-screen">
+      {" "}
+      <span className="loading loading-spinner loading-lg"></span>{" "}
+    </div>
+  ) : (
     <div className="my-20">
       <div
         role="tablist"
@@ -50,7 +55,7 @@ const TourismSection = () => {
       {/* i need to write the content for these tabs */}
       <h1 className={toggleTabs === 1 ? "" : "tab-content"}>hello 1st tab</h1>
       <div className={toggleTabs === 2 ? "" : "tab-content"}>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 my-10 container mx-auto justify-center items-center justify-items-center" >
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 my-10 container mx-auto justify-center items-center justify-items-center">
           {ourPackages.map((item, index) => (
             <OurPackagesCards
               key={index}

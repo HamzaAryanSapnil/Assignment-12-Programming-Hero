@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
+console.log(image_hosting_key);
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddPackages = () => {
@@ -18,25 +19,24 @@ const AddPackages = () => {
   const onSubmit = async (data) => {
     console.log(data);
     const imageFile = { image: data.image[0] };
-    // const formData = new FormData();
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
     if (res.data.success) {
-      const menuItem = {
-        name: data.name,
-        category: data.category,
+      const packageItem = {
+        tourType: data.tourType,
         image: res.data.data.display_url,
         price: parseFloat(data.price),
-        recipe: data.recipe,
+        title: data.title,
       };
-      const menuRes = await axiosSecure.post("/menu", menuItem);
-      console.log(menuRes.data);
-      if (menuRes.data.insertedId) {
+      // i have to make it in axios secure not public
+      const ourPackageRes = await axiosPublic.post("/ourPackages", packageItem);
+      console.log(ourPackageRes.data);
+      if (ourPackageRes.data.insertedId) {
         Swal.fire({
-          title: `${data.name} added successfully`,
+          title: `${data.title} package added successfully`,
           icon: "success",
           showConfirmButton: false,
           timer: 1500,

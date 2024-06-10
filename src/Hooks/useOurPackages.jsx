@@ -17,8 +17,9 @@ const useOurPackages = () => {
   } = useQuery({
     queryKey: ["menu"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/menu");
+      const res = await axiosPublic.get("/ourPackages");
       return res.data;
+     
     },
   });
 
