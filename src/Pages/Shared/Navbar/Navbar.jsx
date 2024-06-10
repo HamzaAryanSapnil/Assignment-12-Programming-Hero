@@ -31,7 +31,7 @@ const Navbar = () => {
         <NavLink to="/about_us">About Us</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
-        <NavLink to="/secret">Secret</NavLink>
+        <NavLink to="/">Cart</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/food_gallery"> Contact Us</NavLink>
@@ -119,9 +119,7 @@ const Navbar = () => {
                     <button className="btn">Dashboard</button>
                   </Link>
                 </li>
-                <li className="my-2" >
-                  <button className="btn btn-disabled text-xs text-black font-black" >{user?.displayName}</button>{" "}
-                </li>
+               
                 <li className="my-2" >
                   {" "}
                   <button className="btn btn-disabled text-xs text-black font-black" >{user?.email}</button>

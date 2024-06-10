@@ -1,20 +1,20 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
-import useWishlist from "../../Hooks/useWishlist";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-const OurPackagesCards = ({ item }) => {
-  const [red, setRed] = useState(false);
+import { useEffect, useState } from "react";
+const OurPackagesCards = ({ item, isWishlisted, refetch }) => {
+  const [red, setRed] = useState(isWishlisted);
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
-  const axiosPublic = useAxiosPublic();
-  const [, refetch] = useWishlist();
+
+  useEffect(() => {
+    setRed(isWishlisted);
+  }, [isWishlisted]);
 
   const handleWishlist = (item) => {
     const { image, price, tourType, title, _id } = item;
@@ -27,9 +27,9 @@ const OurPackagesCards = ({ item }) => {
         image,
         price,
       };
-      axiosPublic.post("/wishList", wishListItem).then((data) => {
-        setRed(true);
+      axiosSecure.post("/wishList", wishListItem).then((data) => {
         if (data.data.insertedId) {
+          setRed(true);
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -93,5 +93,7 @@ const OurPackagesCards = ({ item }) => {
 
 OurPackagesCards.propTypes = {
   item: PropTypes.object,
+  refetch: PropTypes.func,
+  isWishlisted: PropTypes.bool,
 };
 export default OurPackagesCards;

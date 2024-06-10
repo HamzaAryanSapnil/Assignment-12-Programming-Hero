@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useOurPackages from "../../../Hooks/useOurPackages";
 import OurPackagesCards from "../../../Components/OurPackagesCards/OurPackagesCards";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAuth from "../../../Hooks/useAuth";
 
 const TourismSection = () => {
+  const [wishListPackageIds, setWishListPackageIds] = useState([]);
+  const auth = useAuth();
+  const { user } = auth;
+  const axiosSecure = useAxiosSecure();
   const [ourPackages, loading, refetch] = useOurPackages();
+
+  useEffect(() => {
+    axiosSecure.get(`/wishList?email=${user?.email}`).then((data) => {
+      const wishlistData = data.data;
+      const packageId = wishlistData?.map((item) => item?.packageId);
+      console.log(packageId);
+      setWishListPackageIds(packageId);
+    });
+  }, [axiosSecure, user?.email]);
+
   // i need to write tabs function
   const [toggleTabs, setToggleTabs] = useState(1);
   const handleToggleTabs = (index) => {
@@ -60,6 +76,8 @@ const TourismSection = () => {
             <OurPackagesCards
               key={index}
               item={item}
+              isWishlisted={wishListPackageIds.includes(item?._id)}
+              refetch={refetch}
             ></OurPackagesCards>
           ))}
         </div>
