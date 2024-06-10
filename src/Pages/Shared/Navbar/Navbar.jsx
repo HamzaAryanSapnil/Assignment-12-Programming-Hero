@@ -26,9 +26,7 @@ const Navbar = () => {
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/blogs">Blogs</NavLink>
       </li>
-      <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
-        <NavLink to="/admin">Admin</NavLink>
-      </li>
+
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/about_us">About Us</NavLink>
       </li>
@@ -38,6 +36,9 @@ const Navbar = () => {
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/food_gallery"> Contact Us</NavLink>
       </li>
+      {/* <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
+        <NavLink to="/admin">Admin</NavLink>
+      </li> */}
     </>
   );
   return (
@@ -84,7 +85,6 @@ const Navbar = () => {
         </div>
         {user ? (
           <div className="navbar-end md:mr-4">
-           
             <div className="inline-block relative dropdown dropdown-hover  dropdown-left ">
               <div
                 tabIndex={0}
@@ -109,16 +109,23 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content z-40 menu p-2 mt-3 shadow bg-base-100 rounded-box md:w-52 w-40"
+                className="dropdown-content flex flex-col justify-center items-center text-center z-40 menu p-2 mt-3 shadow bg-base-100 rounded-box md:w-52 w-40"
               >
-                <Link
-                  to={"/dashboard"}
-                  className="my-2"
-                >
-                  <button className="btn">
-                    <li>Dashboard</li>
-                  </button>
-                </Link>
+                <li>
+                  <Link
+                    to={"/dashboard"}
+                    className="my-2"
+                  >
+                    <button className="btn">Dashboard</button>
+                  </Link>
+                </li>
+                <li className="my-2" >
+                  <button className="btn btn-disabled text-xs text-black font-black" >{user?.displayName}</button>{" "}
+                </li>
+                <li className="my-2" >
+                  {" "}
+                  <button className="btn btn-disabled text-xs text-black font-black" >{user?.email}</button>
+                </li>
               </ul>
             </div>
 

@@ -38,24 +38,16 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/admin",
+    path: "dashboard",
     element: <AdminLayout />,
     children: [
       {
-        path: "/admin",
-        element: (
-          <PrivateRoutes>
-            <AdminDashboard />
-          </PrivateRoutes>
-        ),
+        path: "dashboard",
+        element: <AdminDashboard />,
       },
       {
         path: "add_packages",
-        element: (
-          <PrivateRoutes>
-            <AddPackages></AddPackages>
-          </PrivateRoutes>
-        ),
+        element: <AddPackages></AddPackages>,
       },
     ],
   },
