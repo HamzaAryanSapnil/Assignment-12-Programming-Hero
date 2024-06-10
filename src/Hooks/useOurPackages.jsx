@@ -1,16 +1,30 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import useAxiosPublic from "./useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const useOurPackages = () => {
-  const [ourPackages, setOurPackages] = useState([]);
-  useEffect(() => {
-      axios.get("ourPackages.json")
-          .then((data) => {
-              setOurPackages(data.data)
-          });
-  }, []);
+  // const [ourPackages, setOurPackages] = useState([]);
+  const axiosPublic = useAxiosPublic();
 
-  return [ourPackages];
+  // axios.get("ourPackages.json")
+  //     .then((data) => {
+  //         setOurPackages(data.data)
+  //     });
+  const {
+    data: ourPackages = [],
+    // isPending: loading,
+    isLoading: loading,
+    refetch,
+  } = useQuery({
+    queryKey: ["menu"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/menu");
+      return res.data;
+    },
+  });
+
+  return [ourPackages, loading, refetch];
+
+
 };
 
 export default useOurPackages;

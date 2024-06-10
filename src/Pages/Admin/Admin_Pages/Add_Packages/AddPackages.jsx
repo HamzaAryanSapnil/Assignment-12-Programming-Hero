@@ -1,14 +1,48 @@
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddPackages = () => {
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    const imageFile = { image: data.image[0] };
+    // const formData = new FormData();
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if (res.data.success) {
+      const menuItem = {
+        name: data.name,
+        category: data.category,
+        image: res.data.data.display_url,
+        price: parseFloat(data.price),
+        recipe: data.recipe,
+      };
+      const menuRes = await axiosSecure.post("/menu", menuItem);
+      console.log(menuRes.data);
+      if (menuRes.data.insertedId) {
+        Swal.fire({
+          title: `${data.name} added successfully`,
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
   };
 
   return (
@@ -26,20 +60,7 @@ const AddPackages = () => {
             className="card-body grid grid-cols-1 md:grid-cols-2 justify-center items-center justify-items-center gap-10"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Spot Photo</span>
-              </label>
-              <input
-                type="text"
-                placeholder="spotPhoto"
-                {...register("spotPhoto", { required: true })}
-                className="input input-bordered"
-              />
-              {errors.spotPhoto && (
-                <span className="text-red-500">This field is required</span>
-              )}
-            </div>
+           
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Tour Type</span>
@@ -81,6 +102,16 @@ const AddPackages = () => {
               {errors.price && (
                 <span className="text-red-500">This field is required</span>
               )}
+            </div>
+            <div className="form-control">
+              <input
+                {...register("image", {
+                  required: true,
+                  message: "Image is required",
+                })}
+                type="file"
+                className="file-input w-full "
+              />
             </div>
 
             <div className="form-control mt-6">

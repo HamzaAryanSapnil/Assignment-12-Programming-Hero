@@ -4,7 +4,7 @@ import useOurPackages from "../../../Hooks/useOurPackages";
 import OurPackagesCards from "../../../Components/OurPackagesCards/OurPackagesCards";
 
 const TourismSection = () => {
-  const [ourPackagesData] = useOurPackages();
+  const [ourPackages, loading, refetch] = useOurPackages();
   // i need to write tabs function
   const [toggleTabs, setToggleTabs] = useState(1);
   const handleToggleTabs = (index) => {
@@ -51,7 +51,7 @@ const TourismSection = () => {
       <h1 className={toggleTabs === 1 ? "" : "tab-content"}>hello 1st tab</h1>
       <div className={toggleTabs === 2 ? "" : "tab-content"}>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 my-10 container mx-auto justify-center items-center justify-items-center" >
-          {ourPackagesData.map((item, index) => (
+          {ourPackages.map((item, index) => (
             <OurPackagesCards
               key={index}
               item={item}
