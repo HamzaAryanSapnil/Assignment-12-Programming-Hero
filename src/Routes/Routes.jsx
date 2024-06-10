@@ -5,10 +5,14 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 
 import PrivateRoutes from "./PrivateRoutes";
-import Secrec from "../Pages/Secrec";
 import AdminDashboard from "../Pages/Admin/Admin_Dashboard/AdminDashboard";
 import AdminLayout from "../Layout/Admin_Layout/AdminLayout";
 import AddPackages from "../Pages/Admin/Admin_Pages/Add_Packages/AddPackages";
+import Hiking from "../Pages/Hiking_Category/Hiking";
+import Sports from "../Pages/Categories/Sports";
+import Walking from "../Pages/Categories/Walking";
+import WildLife from "../Pages/Categories/WildLife";
+import AirRides from "../Pages/Categories/AirRides";
 
 export const router = createBrowserRouter([
   {
@@ -28,12 +32,24 @@ export const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/secret",
-        element: (
-          <PrivateRoutes>
-            <Secrec />
-          </PrivateRoutes>
-        ),
+        path: "/hiking",
+        element: <Hiking />,
+      },
+      {
+        path: "/sports",
+        element: <Sports />,
+      },
+      {
+        path: "/walking",
+        element: <Walking />,
+      },
+      {
+        path: "/wildlife",
+        element: <WildLife />,
+      },
+      {
+        path: "/airRides",
+        element: <AirRides />,
       },
     ],
   },
