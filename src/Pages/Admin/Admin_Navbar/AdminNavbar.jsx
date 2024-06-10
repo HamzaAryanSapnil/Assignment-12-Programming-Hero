@@ -8,6 +8,9 @@ const AdminNavbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
+        <NavLink to="/admin_dashBoard">Admin Dashboard</NavLink>
+      </li>
+      <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/my_profile">My Profile</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
@@ -20,7 +23,7 @@ const AdminNavbar = () => {
     </>
   );
   return (
-    <div className="drawer my-5 mx-4">
+    <div className="drawer z-10 my-5 mx-4">
       <input
         id="my-drawer"
         type="checkbox"
@@ -41,7 +44,7 @@ const AdminNavbar = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+        <ul className="menu z-10 p-4 w-80 min-h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
           {navLinks}
         </ul>
