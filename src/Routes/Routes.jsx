@@ -15,6 +15,7 @@ import AirRides from "../Pages/Categories/AirRides";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import MyWishlist from "../Pages/Tourist/MyWishList/MyWishlist";
 import ManageUsers from "../Pages/Admin/Admin_Pages/Manage_Users/ManageUsers";
+import AdminRoutes from "./AdminRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -67,22 +68,39 @@ export const router = createBrowserRouter([
       </PrivateRoutes>
     ),
     children: [
+      // admin only routes
       {
         path: "my_profife",
-        element: <AddPackages></AddPackages>,
+        element: (
+          <AdminRoutes>
+            <AddPackages></AddPackages>
+          </AdminRoutes>
+        ),
       },
+      {
+        path: "add_packages",
+        element: (
+          <AdminRoutes>
+            <AddPackages></AddPackages>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "manage_users",
+        element: (
+          <AdminRoutes>
+            <ManageUsers></ManageUsers>
+          </AdminRoutes>
+        ),
+      },
+      // tour guide and admin only routes
+
+      // user only routes
+
       {
         path: "my_wishlist",
         element: <MyWishlist></MyWishlist>,
       },
-      {
-        path: "add_packages",
-        element: <AddPackages></AddPackages>,
-      },
-      {
-        path: "manage_users",
-        element: <ManageUsers></ManageUsers>
-      }
     ],
   },
 ]);
