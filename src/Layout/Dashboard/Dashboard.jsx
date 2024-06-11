@@ -10,13 +10,15 @@ import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useWishlist from "../../Hooks/useWishlist";
 import Footer from "../../Pages/Shared/Footer/Footer";
+import useAdmin from "../../Hooks/useAdmin";
+import useTourGuide from "../../Hooks/useTourGuide";
 
 const Dashboard = () => {
   const { user } = useAuth();
   console.log(user?.displayName);
   const [wishlistData] = useWishlist();
-  const isAdmin = true;
-  const isTourGuide = false;
+  const [isAdmin, isAdminLoading, refetch] = useAdmin();
+  const [isTourGuide, isTourGuideLoading, tourRefetch] = useTourGuide();
   const tourGuideNavLinks = (
     <>
      
