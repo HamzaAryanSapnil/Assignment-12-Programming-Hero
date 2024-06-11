@@ -5,14 +5,15 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 
 import PrivateRoutes from "./PrivateRoutes";
-import AdminDashboard from "../Pages/Admin/Admin_Dashboard/AdminDashboard";
-import AdminLayout from "../Layout/Admin_Layout/AdminLayout";
+
 import AddPackages from "../Pages/Admin/Admin_Pages/Add_Packages/AddPackages";
 import Hiking from "../Pages/Hiking_Category/Hiking";
 import Sports from "../Pages/Categories/Sports";
 import Walking from "../Pages/Categories/Walking";
 import WildLife from "../Pages/Categories/WildLife";
 import AirRides from "../Pages/Categories/AirRides";
+import Dashboard from "../Layout/Dashboard/Dashboard";
+import MyWishlist from "../Pages/Tourist/MyWishList/MyWishlist";
 
 export const router = createBrowserRouter([
   {
@@ -55,11 +56,15 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <AdminLayout />,
+    element: <Dashboard />,
     children: [
       {
-        path: "admin_dashBoard",
-        element: <AdminDashboard />,
+        path: "my_profife",
+        element: <AddPackages></AddPackages>,
+      },
+      {
+        path: "my_wishlist",
+        element: <MyWishlist></MyWishlist>,
       },
       {
         path: "add_packages",

@@ -31,8 +31,7 @@ const AddPackages = () => {
         price: parseFloat(data.price),
         title: data.title,
       };
-      // i have to make it in axios secure not public
-      const ourPackageRes = await axiosPublic.post("/ourPackages", packageItem);
+      const ourPackageRes = await axiosSecure.post("/ourPackages", packageItem);
       console.log(ourPackageRes.data);
       if (ourPackageRes.data.insertedId) {
         Swal.fire({
@@ -46,7 +45,7 @@ const AddPackages = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-base-200 p-4 container mx-auto">
+    <div className="hero min-h-screen bg-base-200 p-4 ">
       <div className="hero-content max-w-full min-w-full justify-around gap-10 flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left w-full flex-1">
           <h1 className="text-5xl font-bold text-center">Add a New Package</h1>

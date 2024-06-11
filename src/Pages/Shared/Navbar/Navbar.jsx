@@ -1,9 +1,12 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import useWishlist from "../../../Hooks/useWishlist";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const navigate = useNavigate();
+  const [wishList ] = useWishlist();
+  console.log(wishList);
 
   const handleLogout = () => {
     logOut()
@@ -31,7 +34,7 @@ const Navbar = () => {
         <NavLink to="/about_us">About Us</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
-        <NavLink to="/">Cart</NavLink>
+        <NavLink to="/dashboard/my_wishlist">WishList({ wishList.length })</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/food_gallery"> Contact Us</NavLink>
