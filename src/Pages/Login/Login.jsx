@@ -11,6 +11,7 @@ import { HiEye } from "react-icons/hi";
 import Swal from "sweetalert2";
 // import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Login = () => {
   const [showPass, setShowPass] = useState(true);
   const [loginError, setLoginError] = useState("");
@@ -18,6 +19,7 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
+  const axiosPublic = useAxiosPublic();
   console.log(from);
 
   const {
@@ -62,9 +64,32 @@ const Login = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
-        console.log("Google Login", result);
-        navigate(from, { replace: true });
-        toast.success("Login Successful");
+        const userInfo = {
+          displayName: result?.user?.displayName,
+          email: result?.user?.email,
+          photoURL: result?.user?.photoURL,
+        };
+
+        axiosPublic
+          .post("/users", userInfo)
+          .then((res) => {
+            navigate(from, { replace: true });
+            console.log(res.data);
+              Swal.fire({
+                title: result?.user?.displayName || "Sweet!",
+                text:
+                  `${result?.user?.displayName} Login Successfully` ||
+                  "User Login Successfully",
+                imageUrl:
+                  result?.user?.photoURL ||
+                  "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
+                imageWidth: 400,
+                imageHeight: 200,
+                imageAlt: "Custom image",
+                imageClass: "rounded-circle",
+              });
+          })
+          .catch((err) => console.error(err));
       })
       .catch((error) => console.log(error));
   };

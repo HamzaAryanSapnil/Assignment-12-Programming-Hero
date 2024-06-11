@@ -16,7 +16,6 @@ const TourismSection = () => {
     axiosSecure.get(`/wishList?email=${user?.email}`).then((data) => {
       const wishlistData = data.data;
       const packageId = wishlistData?.map((item) => item?.packageId);
-      console.log(packageId);
       setWishListPackageIds(packageId);
     });
   }, [axiosSecure, user?.email]);

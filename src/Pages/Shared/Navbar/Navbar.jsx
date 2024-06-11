@@ -6,7 +6,6 @@ const Navbar = () => {
   const { user, logOut } = useAuth();
   const navigate = useNavigate();
   const [wishList ] = useWishlist();
-  console.log(wishList);
 
   const handleLogout = () => {
     logOut()

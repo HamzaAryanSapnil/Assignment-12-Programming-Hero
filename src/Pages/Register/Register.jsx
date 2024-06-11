@@ -4,12 +4,14 @@ import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Register = () => {
   const [showPass, setShowPass] = useState(true);
   const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -25,23 +27,35 @@ const Register = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    const email = data.email;
-    const password = data.password;
-    const name = data.firstName + " " + data.lastName;
-    const photoUrl = data.photoURL;
+    const email = data?.email;
+    const password = data?.password;
+    const name = data?.firstName + " " + data?.lastName;
+    const photoUrl = data?.photoURL;
     createUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
         updateUserProfile(name, photoUrl)
           .then(() => {
-            console.log("profile updated");
-            reset();
-            Swal.fire({
-              title: "User Created Successfully",
-              icon: "success",
-            });
-            navigate(from, { replace: true });
+            const userInfo = {
+              displayName: name,
+              photoURL: photoUrl,
+              email: email,
+            }
+            axiosPublic
+              .post("/users", userInfo)
+              .then(res => {
+                if (res.data.insertedId) {
+                  reset();
+                  Swal.fire({
+                    title: `${name} Created Successfully`,
+                    icon: "success",
+                  });
+                  navigate(from, { replace: true });
+                }
+              })
+              .catch(err => console.error(err));
+            
           })
           .catch((error) => {
             console.error(error);
