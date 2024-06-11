@@ -16,7 +16,7 @@ const Dashboard = () => {
   console.log(user?.displayName);
   const [wishlistData] = useWishlist();
   const isAdmin = true;
-  const isTourGuide = true;
+  const isTourGuide = false;
   const tourGuideNavLinks = (
     <>
      

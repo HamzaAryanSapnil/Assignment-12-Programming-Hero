@@ -14,6 +14,7 @@ import WildLife from "../Pages/Categories/WildLife";
 import AirRides from "../Pages/Categories/AirRides";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import MyWishlist from "../Pages/Tourist/MyWishList/MyWishlist";
+import ManageUsers from "../Pages/Admin/Admin_Pages/Manage_Users/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
         path: "add_packages",
         element: <AddPackages></AddPackages>,
       },
+      {
+        path: "manage_users",
+        element: <ManageUsers></ManageUsers>
+      }
     ],
   },
 ]);
