@@ -110,8 +110,7 @@ const ManageUsers = () => {
 
   return (
     <div className="w-full h-full">
-      <h2 className="text-5xl text-center font-medium">Manage Users</h2>
-      <h2 className="text-3xl text-center ">Total Users: {users.length} </h2>
+      <h2 className="text-5xl text-center font-medium">All Users</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra my-12 ">
           {/* head */}

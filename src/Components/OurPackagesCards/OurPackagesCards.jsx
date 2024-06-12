@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { FaHeart } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 const OurPackagesCards = ({ item, isWishlisted, refetch }) => {
@@ -11,7 +11,7 @@ const OurPackagesCards = ({ item, isWishlisted, refetch }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
-
+  console.log(item._id);
   useEffect(() => {
     setRed(isWishlisted);
   }, [isWishlisted]);
@@ -84,7 +84,9 @@ const OurPackagesCards = ({ item, isWishlisted, refetch }) => {
         <p>{item?.price} tk</p>
 
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Book Now</button>
+          <Link to={`/packageDetails/${item?._id}`} >
+            <button className="btn btn-primary">View Package</button>
+          </Link>
         </div>
       </div>
     </div>

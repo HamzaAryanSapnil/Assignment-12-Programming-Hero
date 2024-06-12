@@ -16,6 +16,7 @@ import Dashboard from "../Layout/Dashboard/Dashboard";
 import MyWishlist from "../Pages/Tourist/MyWishList/MyWishlist";
 import ManageUsers from "../Pages/Admin/Admin_Pages/Manage_Users/ManageUsers";
 import AdminRoutes from "./AdminRoutes";
+import PackageDetails from "../Pages/Package_Details/PackageDetails";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,13 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      {
+        path: "/packageDetails/:id",
+        element: <PackageDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/ourPackages/${params.id}`),
+      },
+
       {
         path: "/blogs",
         element: <Home />,
