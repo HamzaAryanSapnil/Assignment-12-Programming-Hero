@@ -4,6 +4,7 @@ import useOurPackages from "../../../Hooks/useOurPackages";
 import OurPackagesCards from "../../../Components/OurPackagesCards/OurPackagesCards";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
+import Videosection from "../Video/Videosection";
 
 const TourismSection = () => {
   const [wishListPackageIds, setWishListPackageIds] = useState([]);
@@ -68,7 +69,9 @@ const TourismSection = () => {
         </Link>
       </div>
       {/* i need to write the content for these tabs */}
-      <h1 className={toggleTabs === 1 ? "" : "tab-content"}>hello 1st tab</h1>
+        <div className={toggleTabs === 1 ? "" : "tab-content"}>
+          <Videosection></Videosection>
+      </div>
       <div className={toggleTabs === 2 ? "" : "tab-content"}>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 my-10 container mx-auto justify-center items-center justify-items-center">
           {ourPackages.map((item, index) => (

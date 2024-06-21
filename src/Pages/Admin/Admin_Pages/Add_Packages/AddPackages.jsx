@@ -30,6 +30,7 @@ const AddPackages = () => {
         image: res.data.data.display_url,
         price: parseFloat(data.price),
         title: data.title,
+        description: data.packageDetails,
       };
       const ourPackageRes = await axiosSecure.post("/ourPackages", packageItem);
       console.log(ourPackageRes.data);
@@ -94,6 +95,20 @@ const AddPackages = () => {
                 className="input input-bordered"
               />
               {errors.title && (
+                <span className="text-red-500">This field is required</span>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Package Details</span>
+              </label>
+              <textarea
+                type="text"
+                placeholder="Enter Package Details"
+                {...register("packageDetails", { required: true })}
+                className="textarea textarea-bordered"
+              />
+              {errors.packageDetails && (
                 <span className="text-red-500">This field is required</span>
               )}
             </div>

@@ -11,7 +11,6 @@ const OurPackagesCards = ({ item, isWishlisted, refetch }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
-  console.log(item._id);
   useEffect(() => {
     setRed(isWishlisted);
   }, [isWishlisted]);
