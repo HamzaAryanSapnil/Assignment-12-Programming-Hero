@@ -6,7 +6,6 @@ import { Pagination } from "swiper/modules";
 import { Link } from "react-router-dom";
 
 const Tour_Category = () => {
-  
   return (
     <Swiper
       slidesPerView={4}
@@ -24,8 +23,9 @@ const Tour_Category = () => {
           <div className="card w-96 bg-base-100 shadow-xl">
             <figure>
               <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                src="https://i.ibb.co/r710Nvn/mesmerizing-scenery-green-mountains-with-cloudy-sky-surface.jpg"
                 alt="Shoes"
+                className="w-full h-64"
               />
             </figure>
             <div className="card-body">
@@ -41,8 +41,9 @@ const Tour_Category = () => {
           <div className="card w-96 bg-base-100 shadow-xl">
             <figure>
               <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                src="https://i.ibb.co/LJ9J44y/mirpur-stadium.jpg"
                 alt="Shoes"
+                className="w-full h-64"
               />
             </figure>
             <div className="card-body">
@@ -57,8 +58,9 @@ const Tour_Category = () => {
           <div className="card w-96 bg-base-100 shadow-xl">
             <figure>
               <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                src="https://i.ibb.co/H2PnTZf/ashraful-pranto-s-Z90-UEv0-CHw-unsplash-1.jpg"
                 alt="Shoes"
+                className="w-full h-64"
               />
             </figure>
             <div className="card-body">
@@ -73,8 +75,9 @@ const Tour_Category = () => {
           <div className="card w-96 bg-base-100 shadow-xl">
             <figure>
               <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                src="https://i.ibb.co/xYm9nHf/amazing-bengal-tiger-nature.jpg"
                 alt="Shoes"
+                className="w-full h-64"
               />
             </figure>
             <div className="card-body">
@@ -86,16 +89,17 @@ const Tour_Category = () => {
       {/* air rides */}
       <SwiperSlide>
         <Link to="/airRides">
-        <div className="card w-96 bg-base-100 shadow-xl">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Air RIdes</h2>
-          </div>
+          <div className="card w-96 bg-base-100 shadow-xl">
+            <figure>
+              <img
+                src="https://i.ibb.co/vdFvFz4/parasallingcox-sbazar.jpg"
+                alt="Shoes"
+                className="w-full h-64"
+              />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title">Air RIdes</h2>
+            </div>
           </div>
         </Link>
       </SwiperSlide>
