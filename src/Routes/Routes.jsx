@@ -18,6 +18,11 @@ import ManageUsers from "../Pages/Admin/Admin_Pages/Manage_Users/ManageUsers";
 import AdminRoutes from "./AdminRoutes";
 import PackageDetails from "../Pages/Package_Details/PackageDetails";
 import AllPackages from "../Pages/AllPackages/AllPackages";
+import TourGuideRoute from "./TourGuideRoute";
+import TouristProfile from "../Pages/Tourist/TouristProfile/TouristProfile";
+import TourGuideProfie from "../Pages/TourGuide/TourGuideProfile/TourGuideProfie";
+import AdminProfile from "../Pages/Admin/Admin_Pages/AdminProfile/AdminProfile";
+import MyAssignedTours from "../Pages/TourGuide/MyAssignedTours/MyAssignedTours";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +39,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/packageDetails/:id",
-        element: <PackageDetails />,
+        element: (
+          <PrivateRoutes>
+            <PackageDetails />
+          </PrivateRoutes>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:3000/ourPackages/${params.id}`),
       },
@@ -83,10 +92,10 @@ export const router = createBrowserRouter([
     children: [
       // admin only routes
       {
-        path: "my_profife",
+        path: "admin_profife",
         element: (
           <AdminRoutes>
-            <AddPackages></AddPackages>
+            <AdminProfile></AdminProfile>
           </AdminRoutes>
         ),
       },
@@ -106,13 +115,33 @@ export const router = createBrowserRouter([
           </AdminRoutes>
         ),
       },
-      // tour guide and admin only routes
+      // tour guide only routes
+      {
+        path: "tour_guide_profife",
+        element: (
+          <TourGuideRoute>
+            <TourGuideProfie></TourGuideProfie>
+          </TourGuideRoute>
+        ),
+      },
+      {
+        path: "my_assigned_tours",
+        element: (
+          <TourGuideRoute>
+            <MyAssignedTours></MyAssignedTours>
+          </TourGuideRoute>
+        ),
+      },
 
       // user only routes
 
       {
         path: "my_wishlist",
         element: <MyWishlist></MyWishlist>,
+      },
+      {
+        path: "my_profife",
+        element: <TouristProfile></TouristProfile>,
       },
     ],
   },

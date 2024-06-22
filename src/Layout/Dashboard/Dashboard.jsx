@@ -21,9 +21,8 @@ const Dashboard = () => {
   const [isTourGuide, isTourGuideLoading, tourRefetch] = useTourGuide();
   const tourGuideNavLinks = (
     <>
-     
       <li>
-        <NavLink to={"/dashboard/my_profife"}>
+        <NavLink to={"/dashboard/tour_guide_profife"}>
           {" "}
           <FaHome /> My Profile
         </NavLink>
@@ -38,9 +37,8 @@ const Dashboard = () => {
   );
   const adminNavLinks = (
     <>
-     
       <li>
-        <NavLink to={"/dashboard/my_profife"}>
+        <NavLink to={"/dashboard/admin_profife"}>
           {" "}
           <FaHome /> My Profile
         </NavLink>

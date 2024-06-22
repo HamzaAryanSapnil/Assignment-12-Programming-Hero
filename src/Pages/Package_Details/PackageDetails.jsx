@@ -1,9 +1,15 @@
 import { useLoaderData } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const PackageDetails = () => {
   const data = useLoaderData();
+  const { user } = useAuth();
   console.log(data);
   const { image, price, title, tourType } = data;
+  const [startDate, setStartDate] = useState(new Date());
 
   return (
     <div className="">
@@ -22,8 +28,82 @@ const PackageDetails = () => {
               {title ? title : "Tour Details"}
             </h1>
             <p className="py-6">{tourType ? tourType : "Tour Details"}</p>
-            <p className="py-6">{price ? price : "Price"}</p>
-            <button className="btn btn-primary"></button>
+            <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+              <form className="card-body">
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Name</span>
+                    <input
+                      type="text"
+                      value={user?.displayName}
+                      className="input input-bordered"
+                      disabled
+                      required
+                    />
+                  </label>
+                  <img
+                    src={user?.photoURL}
+                    className="w-10 h-10 rounded-full"
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Email</span>
+                    <input
+                      type="email"
+                      placeholder="email"
+                      className="input input-bordered"
+                      value={user?.email}
+                      disabled
+                      required
+                    />
+                  </label>
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Price BDT</span>
+                    <input
+                      type="number"
+                      placeholder="price"
+                      className="input input-bordered"
+                      value={price}
+                      disabled
+                      required
+                    />
+                  </label>
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Tour Date</span>
+
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                      className="input input-bordered"
+                    />
+                  </label>
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Tour Guide Name</span>
+                    <select className="select select-bordered w-full max-w-xs">
+                      <option
+                        disabled
+                        selected
+                      >
+                        Please Select Your Tour Guide
+                      </option>
+                      <option>Han Solo</option>
+                      <option>Greedo</option>
+                    </select>
+                  </label>
+                </div>
+                <div className="form-control mt-6">
+                  <button className="btn btn-primary">Book Now</button>
+                </div>
+               
+              </form>
+            </div>
           </div>
         </div>
       </div>

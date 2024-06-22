@@ -2,6 +2,10 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { useState } from "react";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
 console.log(image_hosting_key);
@@ -10,6 +14,13 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddPackages = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
   const {
     register,
     handleSubmit,
@@ -31,6 +42,8 @@ const AddPackages = () => {
         price: parseFloat(data.price),
         title: data.title,
         description: data.packageDetails,
+        to: state[0].endDate,
+        from: state[0].startDate, 
       };
       const ourPackageRes = await axiosSecure.post("/ourPackages", packageItem);
       console.log(ourPackageRes.data);
@@ -45,6 +58,9 @@ const AddPackages = () => {
     }
   };
 
+  const handleDates = range => {
+    setState(range.selection);
+  }
   return (
     <div className="hero min-h-screen bg-base-200 p-4 ">
       <div className="hero-content max-w-full min-w-full justify-around gap-10 flex-col lg:flex-row-reverse">
@@ -93,6 +109,20 @@ const AddPackages = () => {
                 placeholder="title"
                 {...register("title", { required: true })}
                 className="input input-bordered"
+              />
+              {errors.title && (
+                <span className="text-red-500">This field is required</span>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Select Avability</span>
+              </label>
+              <DateRange
+                editableDateInputs={true}
+                onChange={(item) => setState([item.selection])}
+                moveRangeOnFirstSelection={false}
+                ranges={state} 
               />
               {errors.title && (
                 <span className="text-red-500">This field is required</span>
