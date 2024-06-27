@@ -23,6 +23,8 @@ import TouristProfile from "../Pages/Tourist/TouristProfile/TouristProfile";
 import TourGuideProfie from "../Pages/TourGuide/TourGuideProfile/TourGuideProfie";
 import AdminProfile from "../Pages/Admin/Admin_Pages/AdminProfile/AdminProfile";
 import MyAssignedTours from "../Pages/TourGuide/MyAssignedTours/MyAssignedTours";
+import MyBookings from "../Pages/Tourist/MyBookings/MyBookings";
+import RequestToAdmin from "../Pages/Tourist/RequestToAdmin/RequestToAdmin";
 
 export const router = createBrowserRouter([
   {
@@ -142,6 +144,14 @@ export const router = createBrowserRouter([
       {
         path: "my_profife",
         element: <TouristProfile></TouristProfile>,
+      },
+      {
+        path: "my_bookings",
+        element: <MyBookings></MyBookings>,
+      },
+      {
+        path: "request_to_admin",
+        element: <RequestToAdmin></RequestToAdmin>,
       },
     ],
   },

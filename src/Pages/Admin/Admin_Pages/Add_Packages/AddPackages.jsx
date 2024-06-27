@@ -58,9 +58,7 @@ const AddPackages = () => {
     }
   };
 
-  const handleDates = range => {
-    setState(range.selection);
-  }
+ 
   return (
     <div className="hero min-h-screen bg-base-200 p-4 ">
       <div className="hero-content max-w-full min-w-full justify-around gap-10 flex-col lg:flex-row-reverse">

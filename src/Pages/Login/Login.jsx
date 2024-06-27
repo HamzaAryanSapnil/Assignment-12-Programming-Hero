@@ -68,6 +68,8 @@ const Login = () => {
           displayName: result?.user?.displayName,
           email: result?.user?.email,
           photoURL: result?.user?.photoURL,
+          status: "verified",
+          role: "user",
         };
 
         axiosPublic

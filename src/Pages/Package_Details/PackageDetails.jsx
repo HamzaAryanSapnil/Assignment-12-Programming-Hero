@@ -1,15 +1,57 @@
 import { useLoaderData } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
+// import { DateRangePicker } from "react-date-range";
+import { DateRange } from "react-date-range";
+// import { addDays } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
+// import addDays  from "react-datepicker/dist/date_utils";
 
 const PackageDetails = () => {
   const data = useLoaderData();
+  const { image, price, title, tourType, from, to } = data;
+
+  // const [state, setState] = useState({
+  //   selection: {
+  //     startDate: new Date(),
+  //     endDate: null,
+  //     key: "selection",
+  //   },
+  //   compare: {
+  //     startDate: new Date(),
+  //     endDate: addDays(new Date(), 3),
+  //     key: "compare",
+  //   },
+  // });
+  const [state, setState] = useState([
+    {
+      startDate: new Date(from),
+      endDate: new Date(to),
+      key: "selection",
+    },
+  ]);
+
   const { user } = useAuth();
   console.log(data);
-  const { image, price, title, tourType } = data;
-  const [startDate, setStartDate] = useState(new Date());
+
+  const givenDate = {
+    from: new Date(state[0].startDate).toLocaleDateString("en-GB"),
+    to: new Date(state[0].endDate).toLocaleDateString("en-GB"),
+  };
+
+  // const [startDate, setStartDate] = useState(new Date());
+  // const [startDate, setStartDate] = useState(new Date());
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const date = givenDate;
+    const price = form.price.value;
+    const tourGuideName = form.tourGuideName.value;
+    console.log(name, email, date, price, tourGuideName);
+  };
 
   return (
     <div className="">
@@ -29,11 +71,15 @@ const PackageDetails = () => {
             </h1>
             <p className="py-6">{tourType ? tourType : "Tour Details"}</p>
             <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-              <form className="card-body">
+              <form
+                onSubmit={handleSubmit}
+                className="card-body"
+              >
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Name</span>
                     <input
+                      name="name"
                       type="text"
                       value={user?.displayName}
                       className="input input-bordered"
@@ -50,6 +96,7 @@ const PackageDetails = () => {
                   <label className="label">
                     <span className="label-text">Email</span>
                     <input
+                      name="email"
                       type="email"
                       placeholder="email"
                       className="input input-bordered"
@@ -63,6 +110,7 @@ const PackageDetails = () => {
                   <label className="label">
                     <span className="label-text">Price BDT</span>
                     <input
+                      name="price"
                       type="number"
                       placeholder="price"
                       className="input input-bordered"
@@ -74,34 +122,65 @@ const PackageDetails = () => {
                 </div>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Tour Date</span>
-
-                    <DatePicker
-                      selected={startDate}
-                      onChange={(date) => setStartDate(date)}
-                      className="input input-bordered"
+                    <span className="label-text">Tour Date </span>
+                    {/* <DateRangePicker
+                      onChange={(item) => setState({ ...state, ...item })}
+                      months={1}
+                      minDate={addDays(new Date(), -30)}
+                      maxDate={addDays(new Date(), 30)}
+                      direction="vertical"
+                      scroll={{ enabled: true }}
+                      ranges={[state.selection, state.compare]}
+                    /> */}
+                    {/* <DateRangePicker
+                      onChange={(item) => setState({ ...state, ...item })}
+                      months={1}
+                      minDate={new Date()}
+                      maxDate={addDays(new Date(), 7)}
+                      direction="vertical"
+                      scroll={{ enabled: true }}
+                      ranges={[state.selection, state.compare]}
+                    /> */}
+                    <DateRange
+                      
+                      onChange={(item) => {
+                        console.log("item", item);
+                        setState([
+                          {
+                            startDate: new Date(from),
+                            endDate: new Date(to),
+                            key: "selection",
+                          },
+                        ]);
+                      }}
+                      moveRangeOnFirstSelection={false}
+                      ranges={state}
                     />
+                    ;
                   </label>
                 </div>
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Tour Guide Name</span>
-                    <select className="select select-bordered w-full max-w-xs">
+                    <select
+                      name="tourGuideName"
+                      className="select select-bordered w-full max-w-xs"
+                      defaultValue="Please Select Your Tour Guide"
+                    >
                       <option
                         disabled
-                        selected
+                        defaultValue="Please Select Your Tour Guide"
                       >
                         Please Select Your Tour Guide
                       </option>
-                      <option>Han Solo</option>
-                      <option>Greedo</option>
+                      <option value="Han Solo">Han Solo</option>
+                      <option value="Greedo">Greedo</option>
                     </select>
                   </label>
                 </div>
                 <div className="form-control mt-6">
                   <button className="btn btn-primary">Book Now</button>
                 </div>
-               
               </form>
             </div>
           </div>

@@ -1,16 +1,26 @@
-import { FaTrash } from "react-icons/fa";
+import { FaRegUserCircle, FaTrash } from "react-icons/fa";
 import useLoadUsers from "../../../../Hooks/useLoadUsers";
 import { MdOutlineTour } from "react-icons/md";
 import { MdAdminPanelSettings } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import useAuth from "../../../../Hooks/useAuth";
 
 const ManageUsers = () => {
   const [users, refetch] = useLoadUsers();
+  const {user: loggedInUser} = useAuth();
+  
     // i have to make axiosSecure here to delete user
     
     const axiosSecure = useAxiosSecure();
   const handleDeleteUser = (user) => {
+     if (loggedInUser?.email === user?.email) {
+       return Swal.fire({
+         icon: "error",
+         title: "Error",
+         text: "You can't delete yourself",
+       });
+     }
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -63,6 +73,13 @@ const ManageUsers = () => {
   };
 
   const handleMakeAdmin = (user) => {
+     if (loggedInUser?.email === user?.email) {
+       return Swal.fire({
+         icon: "error",
+         title: "Error",
+         text: "You are already an admin",
+       });
+     }
     axiosSecure
       .patch(`/users/admin/${user?._id}`)
       .then((res) => {
@@ -86,6 +103,13 @@ const ManageUsers = () => {
   };
 
   const handleMakeTourGuide = (user) => {
+    if (loggedInUser?.email === user?.email) {
+      return Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "You can't make yourself tour guide",
+      })
+    }
     axiosSecure
       .patch(`/users/tourGuide/${user?._id}`)
       .then((res) => {
@@ -96,6 +120,35 @@ const ManageUsers = () => {
             icon: "success",
             title: "Success",
             text: `${user?.displayName} made tour guide successfully`,
+          });
+        }
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: err.message,
+        });
+      });
+  };
+  const handleMakeUser = (user) => {
+     if (loggedInUser?.email === user?.email) {
+       return Swal.fire({
+         icon: "error",
+         title: "Error",
+         text: "You can't make yourself a user",
+       });
+     }
+    axiosSecure
+      .patch(`/users/makeUser/${user?._id}`)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Success",
+            text: `${user?.displayName} made user successfully`,
           });
         }
       })
@@ -120,6 +173,8 @@ const ManageUsers = () => {
               <th>Name</th>
               <th>Role</th>
               <th>Email</th>
+              <th>Status</th>
+              <th>Action</th>
               <th>Action</th>
               <th>Action</th>
               <th>Action</th>
@@ -132,6 +187,7 @@ const ManageUsers = () => {
                 <td> {row?.displayName} </td>
                 <td>{row?.role ? row?.role : "user"}</td>
                 <td>{row?.email}</td>
+                <td>{row?.status}</td>
                 <td>
                 
                   <button
@@ -150,6 +206,16 @@ const ManageUsers = () => {
                     data-tip="make tour guide"
                   >
                     <MdOutlineTour />
+                  </button>
+                </td>
+                <td>
+                 
+                  <button
+                    onClick={() => handleMakeUser(row)}
+                    className="btn bg-transparent border-none text-black text-xl tooltip"
+                    data-tip="make user"
+                  >
+                    <FaRegUserCircle /> 
                   </button>
                 </td>
                 <td>

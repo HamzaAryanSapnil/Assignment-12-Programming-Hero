@@ -41,6 +41,8 @@ const Register = () => {
               displayName: name,
               photoURL: photoUrl,
               email: email,
+              role: "user",
+              status: "verified",
             }
             axiosPublic
               .post("/users", userInfo)

@@ -69,12 +69,14 @@ const TourismSection = () => {
         </Link>
       </div>
       {/* i need to write the content for these tabs */}
-        <div className={toggleTabs === 1 ? "" : "tab-content"}>
-          <Videosection></Videosection>
+      {/* tab 1 */}
+      <div className={toggleTabs === 1 ? "" : "tab-content"}>
+        <Videosection></Videosection>
       </div>
+      {/* tab 2 */}
       <div className={toggleTabs === 2 ? "" : "tab-content"}>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 my-10 container mx-auto justify-center items-center justify-items-center">
-          {ourPackages.map((item, index) => (
+          {ourPackages.slice(0, 6).map((item, index) => (
             <OurPackagesCards
               key={index}
               item={item}
@@ -82,8 +84,14 @@ const TourismSection = () => {
               refetch={refetch}
             ></OurPackagesCards>
           ))}
+          {ourPackages.length > 6 && (
+            <Link to="/allPackages" className="text-center mx-auto flex justify-center items-center " >
+              <button className="btn btn-primary">View all packages</button>
+            </Link>
+          )}
         </div>
       </div>
+      {/* tab 3 */}
       <h1 className={toggleTabs === 3 ? "" : "tab-content"}>hello 3rd tab</h1>
     </div>
   );
