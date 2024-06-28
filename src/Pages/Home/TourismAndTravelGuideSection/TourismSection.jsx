@@ -5,6 +5,7 @@ import OurPackagesCards from "../../../Components/OurPackagesCards/OurPackagesCa
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import Videosection from "../Video/Videosection";
+import MeetOurTourGuides from "../../../Components/MeetOurTourGuides/MeetOurTourGuides";
 
 const TourismSection = () => {
   const [wishListPackageIds, setWishListPackageIds] = useState([]);
@@ -91,8 +92,10 @@ const TourismSection = () => {
           )}
         </div>
       </div>
-      {/* tab 3 */}
-      <h1 className={toggleTabs === 3 ? "" : "tab-content"}>hello 3rd tab</h1>
+        {/* tab 3 */}
+        <div>
+          <MeetOurTourGuides></MeetOurTourGuides>
+        </div>
     </div>
   );
 };

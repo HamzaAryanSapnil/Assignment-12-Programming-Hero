@@ -26,6 +26,9 @@ import MyAssignedTours from "../Pages/TourGuide/MyAssignedTours/MyAssignedTours"
 import MyBookings from "../Pages/Tourist/MyBookings/MyBookings";
 import RequestToAdmin from "../Pages/Tourist/RequestToAdmin/RequestToAdmin";
 import Payment from "../Pages/Package_Details/Payment";
+import Blogs from "../Pages/Blogs/Blogs";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -50,11 +53,18 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:3000/ourPackages/${params.id}`),
       },
-     
 
       {
         path: "/blogs",
-        element: <Home />,
+        element: <Blogs />,
+      },
+      {
+        path: "/about_us",
+        element: <AboutUs />,
+      },
+      {
+        path: "/contact_us",
+        element: <ContactUs />,
       },
       {
         path: "/login",
@@ -151,9 +161,9 @@ export const router = createBrowserRouter([
         path: "my_bookings",
         element: <MyBookings></MyBookings>,
       },
-       {
+      {
         path: "payment",
-        element: <Payment></Payment>     
+        element: <Payment></Payment>,
       },
 
       {
