@@ -3,6 +3,7 @@ import useWishlist from "../../../Hooks/useWishlist";
 import {  FaTableList } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const MyWishlist = () => {
   const [wishList, refetch] = useWishlist();
@@ -79,19 +80,21 @@ const MyWishlist = () => {
           </thead>
           <tbody>
             {wishList.map((item, index) => (
-              <tr key={item._id}>
+              <tr key={item?._id}>
                 <th> {index + 1} </th>
                 <td> {item?.title} </td>
                 <td> {item?.tourType} </td>
                 <td> {item?.price} </td>
-                <td>
-                  <span
-                    className="tooltip font-bold btn bg-transparent p-4 border-none"
-                    data-tip="View Details"
-                  >
-                    <FaTableList />
-                  </span>
-                </td>
+                <Link to={`/packageDetails/${item?.packageId}`}>
+                  <td>
+                    <span
+                      className="tooltip font-bold btn bg-transparent p-4 border-none"
+                      data-tip="View Details"
+                    >
+                      <FaTableList />
+                    </span>
+                  </td>
+                </Link>
                 <td>
                   <span
                     className="tooltip text-red-700 font-bold btn bg-transparent p-4 border-none "

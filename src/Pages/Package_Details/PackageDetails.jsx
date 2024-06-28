@@ -34,7 +34,7 @@ const PackageDetails = () => {
   // console.log(tourGuides);
   const data = useLoaderData();
   const { image, price, title, tourType, from, to } = data;
-
+  console.log(data);
   // const [state, setState] = useState({
   //   selection: {
   //     startDate: new Date(),
