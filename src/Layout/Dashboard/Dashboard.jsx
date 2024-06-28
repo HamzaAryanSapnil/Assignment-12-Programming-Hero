@@ -17,8 +17,8 @@ const Dashboard = () => {
   const { user } = useAuth();
   console.log(user?.displayName);
   const [wishlistData] = useWishlist();
-  const [isAdmin, isAdminLoading, refetch] = useAdmin();
-  const [isTourGuide, isTourGuideLoading, tourRefetch] = useTourGuide();
+  const [isAdmin] = useAdmin();
+  const [isTourGuide] = useTourGuide();
   const tourGuideNavLinks = (
     <>
       <li>

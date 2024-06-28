@@ -44,9 +44,11 @@ const Register = () => {
               role: "user",
               status: "verified",
             }
+            console.log(userInfo);
             axiosPublic
               .post("/users", userInfo)
               .then(res => {
+                console.log(res.data);
                 if (res.data.insertedId) {
                   reset();
                   Swal.fire({

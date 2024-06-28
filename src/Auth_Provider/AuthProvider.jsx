@@ -60,23 +60,12 @@ const AuthProvider = ({ children }) => {
 
 
   // save user to mongodb
-  const saveUser = async (userSaving) => {
-    const currentUser = {
-      email: userSaving?.email,
-      name: userSaving?.displayName,
-      photo: userSaving?.photoURL,
-      role: "user",
-      status: "verified",
-    };
-    const {data} = await axiosPublic.put("/users", currentUser);
-    return data;
-  }
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      console.log(currentUser);
       if (currentUser) {
-        saveUser(currentUser);
         axiosPublic.post("/jwt", { email: currentUser?.email }).then((res) => {
           console.log(res?.data);
           if (res?.data?.token) {

@@ -1,14 +1,37 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import DatePicker from "react-datepicker";
 // import { DateRangePicker } from "react-date-range";
 import { DateRange } from "react-date-range";
 // import { addDays } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
+
+import useLoadAllTourGuides from "../../Hooks/useLoadAllTourGuides";
 // import addDays  from "react-datepicker/dist/date_utils";
 
+
+
 const PackageDetails = () => {
+  const [tourGuides, refetch, isLoading] = useLoadAllTourGuides();
+
+
+
+
+  console.log(tourGuides);
+  // destructure tourGuides data
+
+
+  
+
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+ 
+  // console.log(tourGuides);
   const data = useLoaderData();
   const { image, price, title, tourType, from, to } = data;
 
@@ -33,7 +56,6 @@ const PackageDetails = () => {
   ]);
 
   const { user } = useAuth();
-  console.log(data);
 
   const givenDate = {
     from: new Date(state[0].startDate).toLocaleDateString("en-GB"),
@@ -50,8 +72,44 @@ const PackageDetails = () => {
     const date = givenDate;
     const price = form.price.value;
     const tourGuideName = form.tourGuideName.value;
-    console.log(name, email, date, price, tourGuideName);
-  };
+    const selectedTourGuide = tourGuides.find(
+      (tourGuide) => tourGuide.displayName === tourGuideName
+    );
+
+    const {
+      _id,
+      displayName,
+      email: tourGuideEmail,
+      ...otherProps
+    } = selectedTourGuide;
+
+    console.log(name, email, date, price, tourGuideName, tourGuideEmail, _id);
+    const bookingData = {
+      name,
+      email,
+      date,
+      price,
+      tourGuideName,
+      title,
+      tourType,
+      image,
+      tourGuide: {
+        _id,
+        displayName,
+        email: tourGuideEmail,
+        ...otherProps,
+      },
+    };
+    navigate("/dashboard/payment", { state: bookingData });
+   
+  }
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen" >
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    )
+  }
 
   return (
     <div className="">
@@ -70,7 +128,7 @@ const PackageDetails = () => {
               {title ? title : "Tour Details"}
             </h1>
             <p className="py-6">{tourType ? tourType : "Tour Details"}</p>
-            <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="card shrink-0 w-full  shadow-2xl bg-base-100">
               <form
                 onSubmit={handleSubmit}
                 className="card-body"
@@ -142,7 +200,6 @@ const PackageDetails = () => {
                       ranges={[state.selection, state.compare]}
                     /> */}
                     <DateRange
-                      
                       onChange={(item) => {
                         console.log("item", item);
                         setState([
@@ -173,8 +230,14 @@ const PackageDetails = () => {
                       >
                         Please Select Your Tour Guide
                       </option>
-                      <option value="Han Solo">Han Solo</option>
-                      <option value="Greedo">Greedo</option>
+                      {tourGuides?.map((tourGuide) => (
+                        <option
+                          key={tourGuide._id}
+                          value={tourGuide?.displayName}
+                        >
+                          {tourGuide?.displayName}
+                        </option>
+                      ))}
                     </select>
                   </label>
                 </div>

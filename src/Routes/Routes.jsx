@@ -25,6 +25,7 @@ import AdminProfile from "../Pages/Admin/Admin_Pages/AdminProfile/AdminProfile";
 import MyAssignedTours from "../Pages/TourGuide/MyAssignedTours/MyAssignedTours";
 import MyBookings from "../Pages/Tourist/MyBookings/MyBookings";
 import RequestToAdmin from "../Pages/Tourist/RequestToAdmin/RequestToAdmin";
+import Payment from "../Pages/Package_Details/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,7 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:3000/ourPackages/${params.id}`),
       },
+     
 
       {
         path: "/blogs",
@@ -149,6 +151,11 @@ export const router = createBrowserRouter([
         path: "my_bookings",
         element: <MyBookings></MyBookings>,
       },
+       {
+        path: "payment",
+        element: <Payment></Payment>     
+      },
+
       {
         path: "request_to_admin",
         element: <RequestToAdmin></RequestToAdmin>,
