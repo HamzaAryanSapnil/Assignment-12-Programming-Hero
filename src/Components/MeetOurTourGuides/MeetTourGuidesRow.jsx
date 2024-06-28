@@ -5,7 +5,7 @@ const MeetTourGuidesRow = ({ tourGuide, index, refetch }) => {
     return (
       <tr>
             <th>{ index + 1 }</th>
-            <td>{ tourGuide?.name }</td>
+            <td>{ tourGuide?.displayName }</td>
             <td>{ tourGuide?.email }</td>
             <td>{ tourGuide?.status }</td>
       </tr>
