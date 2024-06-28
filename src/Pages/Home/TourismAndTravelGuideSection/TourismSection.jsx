@@ -93,7 +93,7 @@ const TourismSection = () => {
         </div>
       </div>
         {/* tab 3 */}
-        <div>
+        <div className={toggleTabs === 3 ? "" : "tab-content"} >
           <MeetOurTourGuides></MeetOurTourGuides>
         </div>
     </div>
