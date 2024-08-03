@@ -46,7 +46,7 @@ const TourismSection = () => {
             borderBottom: toggleTabs === 1 && "4px solid rgb(249 115 22)",
           }}
         >
-          Tab 1
+          Overview
         </Link>
         <Link
           onClick={() => handleToggleTabs(2)}
@@ -56,7 +56,7 @@ const TourismSection = () => {
             borderBottom: toggleTabs === 2 && "4px solid rgb(249 115 22)",
           }}
         >
-          Tab 2
+          Our Packages
         </Link>
         <Link
           onClick={() => handleToggleTabs(3)}
@@ -66,7 +66,7 @@ const TourismSection = () => {
             borderBottom: toggleTabs === 3 && "4px solid rgb(249 115 22)",
           }}
         >
-          Tab 3
+         Meet Our Tour Guides
         </Link>
       </div>
       {/* i need to write the content for these tabs */}

@@ -51,9 +51,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://assignment-12-tourist-guide-server-side.vercel.app/ourPackages/${params.id}`
-          ),
+          fetch(`http://localhost:3000/ourPackages/${params.id}`),
       },
 
       {
