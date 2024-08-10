@@ -1,0 +1,44 @@
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 384px !important;
+    /* height: 300px; */
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+}
+
+
+
+.swiper-slide-custom .card {
+    height: auto;
+}
+
+/* Styles for screens with a width of up to 640px */
+@media (max-width: 640px) {
+    .swiper-slide-custom .card {
+        width: 100%;
+        /* Adjust as needed */
+        height: 400px;
+        /* Adjust as needed */
+    }
+}
+
+/* Styles for screens with a width between 641px and 1023px */
+@media (min-width: 641px) and (max-width: 1023px) {
+    .swiper-slide-custom .card {
+        width: 60%;
+        /* Adjust as needed */
+        height: 350px;
+        /* Adjust as needed */
+    }
+}
+

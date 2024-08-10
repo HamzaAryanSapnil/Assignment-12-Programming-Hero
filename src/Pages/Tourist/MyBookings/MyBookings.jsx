@@ -3,6 +3,8 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import MyBookingsRow from "./MyBookingsRow";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import CommonBtn from "../../../Components/Buttons/CommonBtn";
 
 const MyBookings = () => {
   const { user } = useAuth();
@@ -49,10 +51,23 @@ const MyBookings = () => {
             <span className="loading loading-spinner loading-lg"></span>
         </div>
         
-    }
+  }
+  
+  if (payments.length === 0) {
+    return (
+      <div className="flex flex-col gap-10 justify-center items-center h-screen">
+        <h1 className="text-4xl font-bold">No Bookings!</h1>
+        <Link to="/">
+          <CommonBtn text="Go To Home" />
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="overflow-x-auto w-full container mx-auto">
+      <h1 className="text-3xl font-bold mb-5">My Bookings</h1>
+      <p className="text-lg mb-5 text-dark-03 font-extralight font-libre-franklin" >Please Donot Forget to Share Your Story If Your Status is Approved</p>
       <table className="table ">
         {/* head */}
         <thead>
@@ -62,6 +77,7 @@ const MyBookings = () => {
             <th> Price And Date </th>
             <th>Status</th>
             <th>Action</th>
+            <th>Your Exp</th>
           </tr>
         </thead>
         <tbody>
@@ -70,6 +86,8 @@ const MyBookings = () => {
           ))}
         </tbody>
       </table>
+      {/* Share Your Story Section */}
+      
     </div>
   );
 };

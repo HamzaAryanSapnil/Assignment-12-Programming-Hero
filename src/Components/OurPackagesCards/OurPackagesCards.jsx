@@ -5,6 +5,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
+import CommonBtn from "../Buttons/CommonBtn";
 const OurPackagesCards = ({ item, isWishlisted, refetch }) => {
   const [red, setRed] = useState(isWishlisted);
   const { user } = useAuth();
@@ -56,7 +57,7 @@ const OurPackagesCards = ({ item, isWishlisted, refetch }) => {
     }
   };
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="card w-full lg:w-96 bg-base-100 shadow-xl">
       <figure>
         <img
           src={
@@ -84,7 +85,8 @@ const OurPackagesCards = ({ item, isWishlisted, refetch }) => {
 
         <div className="card-actions justify-end">
           <Link to={`/packageDetails/${item?._id}`} >
-            <button className="btn btn-primary">View Package</button>
+            {/* <button className="btn btn-primary">View Package</button> */}
+            <CommonBtn text="View Details"></CommonBtn>
           </Link>
         </div>
       </div>

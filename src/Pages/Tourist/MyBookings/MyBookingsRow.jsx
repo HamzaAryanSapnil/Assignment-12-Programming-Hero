@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import { FaTrash } from "react-icons/fa";
+import CommonBtn from "../../../Components/Buttons/CommonBtn";
+import { Link } from "react-router-dom";
 const MyBookingsRow = ({ index, payment, handleDelete }) => {
   const { date } = payment;
   const givenDate = new Date(date).toLocaleDateString();
@@ -67,6 +69,15 @@ const MyBookingsRow = ({ index, payment, handleDelete }) => {
           <FaTrash className="text-red-500" />{" "}
         </button>
       </th>
+      <td>
+        <button
+          disabled={payment?.status !== "approved"}
+          className="btn btn-outline rounded-full font-libre-franklin  font-medium  text-vdo-btn "
+        >
+          {" "}
+          <Link to={`/tourist_story/${payment?._id}`}>Share Your Story </Link>
+        </button>
+      </td>
     </tr>
   );
 };
