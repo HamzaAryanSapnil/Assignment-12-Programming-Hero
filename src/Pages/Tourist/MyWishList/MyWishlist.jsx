@@ -4,6 +4,7 @@ import {  FaTableList } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import CommonBtn from "../../../Components/Buttons/CommonBtn";
 
 const MyWishlist = () => {
   const [wishList, refetch] = useWishlist();
@@ -60,6 +61,18 @@ const MyWishlist = () => {
         }
       });
   };
+    if (wishList.length === 0) {
+      return (
+        <div className="flex flex-col gap-10 justify-center items-center h-screen">
+          <h1 className="text-4xl font-bold">
+            You don&apos;t have any wishList!
+          </h1>
+          <Link to="/">
+            <CommonBtn text="Go To Home" />
+          </Link>
+        </div>
+      );
+    }
   return (
     <div className="w-full">
       <h2 className="text-2xl font-bold text-center">

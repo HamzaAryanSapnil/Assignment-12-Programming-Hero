@@ -1,31 +1,24 @@
 import useAxiosPublic from "./useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
-const useOurPackages = () => {
-  // const [ourPackages, setOurPackages] = useState([]);
+const useOurPackages = (tourType) => {
   const axiosPublic = useAxiosPublic();
+  console.log("Tour Type From useOurPackages hook: ", tourType);
+  
 
-  // axios.get("ourPackages.json")
-  //     .then((data) => {
-  //         setOurPackages(data.data)
-  //     });
   const {
     data: ourPackages = [],
-    // isPending: loading,
     isLoading: loading,
     refetch,
   } = useQuery({
-    queryKey: ["menu"],
+    queryKey: ["ourPackages", tourType],
     queryFn: async () => {
-      const res = await axiosPublic.get("/ourPackages");
+      const res = await axiosPublic.get(`/ourPackages?tourType=${tourType}`);
       return res.data;
-     
     },
   });
 
   return [ourPackages, loading, refetch];
-
-
 };
 
 export default useOurPackages;

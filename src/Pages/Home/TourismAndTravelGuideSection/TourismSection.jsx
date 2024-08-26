@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useOurPackages from "../../../Hooks/useOurPackages";
 import OurPackagesCards from "../../../Components/OurPackagesCards/OurPackagesCards";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
@@ -9,13 +8,16 @@ import MeetOurTourGuides from "../../../Components/MeetOurTourGuides/MeetOurTour
 import CommonBtn from "../../../Components/Buttons/CommonBtn";
 import Container from "../../Shared/Container";
 import Heading from "../../Shared/Heading";
+import useOurPackages from "../../../Hooks/useOurPackages";
 
 const TourismSection = () => {
   const [wishListPackageIds, setWishListPackageIds] = useState([]);
   const auth = useAuth();
   const { user } = auth;
   const axiosSecure = useAxiosSecure();
-  const [ourPackages, loading, refetch] = useOurPackages();
+  const [ourPackages, loading, refetch] = useOurPackages("");
+  console.log("Our packages from Home Page Tourism Section: ", ourPackages);
+  
 
   useEffect(() => {
     axiosSecure.get(`/wishList?email=${user?.email}`).then((data) => {
@@ -89,7 +91,7 @@ const TourismSection = () => {
           <Container>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 my-10  mx-auto justify-start  items-center justify-items-center mt-16 p-2 md:p-4">
               {ourPackages && ourPackages.length > 0 ? (
-                ourPackages.slice(0, 6).map((item, index) => (
+                ourPackages.slice(0, 3).map((item, index) => (
                   <OurPackagesCards
                     key={index}
                     item={item}
@@ -106,7 +108,7 @@ const TourismSection = () => {
               )}
             </div>
           </Container>
-          {ourPackages.length > 6 && (
+          {ourPackages.length > 3 && (
             <Link
               to="/allPackages"
               className="text-center mx-auto flex justify-center items-center "

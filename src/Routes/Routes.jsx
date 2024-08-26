@@ -7,21 +7,17 @@ import Register from "../Pages/Register/Register";
 import PrivateRoutes from "./PrivateRoutes";
 
 import AddPackages from "../Pages/Admin/Admin_Pages/Add_Packages/AddPackages";
-import Hiking from "../Pages/Hiking_Category/Hiking";
-import Sports from "../Pages/Categories/Sports";
-import Walking from "../Pages/Categories/Walking";
-import WildLife from "../Pages/Categories/WildLife";
-import AirRides from "../Pages/Categories/AirRides";
-import Dashboard from "../Layout/Dashboard/Dashboard";
+
+// import Dashboard from "../Layout/Dashboard/Dashboard";
 import MyWishlist from "../Pages/Tourist/MyWishList/MyWishlist";
 import ManageUsers from "../Pages/Admin/Admin_Pages/Manage_Users/ManageUsers";
 import AdminRoutes from "./AdminRoutes";
 import PackageDetails from "../Pages/Package_Details/PackageDetails";
 import AllPackages from "../Pages/AllPackages/AllPackages";
 import TourGuideRoute from "./TourGuideRoute";
-import TouristProfile from "../Pages/Tourist/TouristProfile/TouristProfile";
-import TourGuideProfie from "../Pages/TourGuide/TourGuideProfile/TourGuideProfie";
-import AdminProfile from "../Pages/Admin/Admin_Pages/AdminProfile/AdminProfile";
+// import TouristProfile from "../Pages/Tourist/TouristProfile/TouristProfile";
+// import TourGuideProfie from "../Pages/TourGuide/TourGuideProfile/TourGuideProfie";
+// import AdminProfile from "../Pages/Admin/Admin_Pages/AdminProfile/AdminProfile";
 import MyAssignedTours from "../Pages/TourGuide/MyAssignedTours/MyAssignedTours";
 import MyBookings from "../Pages/Tourist/MyBookings/MyBookings";
 import RequestToAdmin from "../Pages/Tourist/RequestToAdmin/RequestToAdmin";
@@ -30,6 +26,9 @@ import Blogs from "../Pages/Blogs/Blogs";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import Tourist_Story_Sec from "../Pages/Home/Tourist_Story_Section/Tourist_Story_Sec";
+import Dashboard from "../Layout/Dashboard/Dashboard";
+import ProfilePage from "../Pages/Common/Profile/ProfilePage";
+import StoryDetails from "../Pages/Home/Tourist_Story_Section/StoryDetails";
 
 export const router = createBrowserRouter([
   {
@@ -45,14 +44,16 @@ export const router = createBrowserRouter([
         element: <AllPackages />,
       },
       {
+        path: "/story_details/:id",
+        element: <StoryDetails />,
+      },
+      {
         path: "/packageDetails/:id",
         element: (
           <PrivateRoutes>
             <PackageDetails />
           </PrivateRoutes>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:3000/ourPackages/${params.id}`),
       },
 
       {
@@ -75,26 +76,7 @@ export const router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
-      {
-        path: "/hiking",
-        element: <Hiking />,
-      },
-      {
-        path: "/sports",
-        element: <Sports />,
-      },
-      {
-        path: "/walking",
-        element: <Walking />,
-      },
-      {
-        path: "/wildlife",
-        element: <WildLife />,
-      },
-      {
-        path: "/airRides",
-        element: <AirRides />,
-      },
+
       {
         path: "/tourist_story/:id",
         element: <Tourist_Story_Sec />,
@@ -104,22 +86,28 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "dashboard",
+    path: "/dashboard",
     element: (
       <PrivateRoutes>
-        <Dashboard />
+        <Dashboard></Dashboard>
       </PrivateRoutes>
     ),
+    errorElement: <p>this is an error</p>,
     children: [
-      // admin only routes
+      // common route for every one
       {
-        path: "admin_profife",
-        element: (
-          <AdminRoutes>
-            <AdminProfile></AdminProfile>
-          </AdminRoutes>
-        ),
+        index: true,
+        element: <ProfilePage></ProfilePage>,
       },
+      // admin only routes
+      // {
+      //   path: "admin_profife",
+      //   element: (
+      //     <AdminRoutes>
+      //       <AdminProfile></AdminProfile>
+      //     </AdminRoutes>
+      //   ),
+      // },
       {
         path: "add_packages",
         element: (
@@ -137,14 +125,14 @@ export const router = createBrowserRouter([
         ),
       },
       // tour guide only routes
-      {
-        path: "tour_guide_profife",
-        element: (
-          <TourGuideRoute>
-            <TourGuideProfie></TourGuideProfie>
-          </TourGuideRoute>
-        ),
-      },
+      // {
+      //   path: "tour_guide_profife",
+      //   element: (
+      //     <TourGuideRoute>
+      //       <TourGuideProfie></TourGuideProfie>
+      //     </TourGuideRoute>
+      //   ),
+      // },
       {
         path: "my_assigned_tours",
         element: (
@@ -160,10 +148,10 @@ export const router = createBrowserRouter([
         path: "my_wishlist",
         element: <MyWishlist></MyWishlist>,
       },
-      {
-        path: "my_profife",
-        element: <TouristProfile></TouristProfile>,
-      },
+      // {
+      //   path: "my_profife",
+      //   element: <TouristProfile></TouristProfile>,
+      // },
       {
         path: "my_bookings",
         element: <MyBookings></MyBookings>,

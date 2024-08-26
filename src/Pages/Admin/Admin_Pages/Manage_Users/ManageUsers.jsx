@@ -5,9 +5,10 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
+import { TbLoader } from "react-icons/tb";
 
 const ManageUsers = () => {
-  const [users, refetch] = useLoadUsers();
+  const [users, isLoading, refetch] = useLoadUsers();
   const {user: loggedInUser} = useAuth();
   
     // i have to make axiosSecure here to delete user
@@ -160,6 +161,14 @@ const ManageUsers = () => {
         });
       });
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen justify-center items-center" >
+        <TbLoader className="animate-spin" ></TbLoader>
+      </div>
+    )
+  }
 
   return (
     <div className="w-full h-full">

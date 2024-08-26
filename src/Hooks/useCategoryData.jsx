@@ -9,28 +9,28 @@ const useCategoryData = () => {
        {
          image:
            "https://i.ibb.co/r710Nvn/mesmerizing-scenery-green-mountains-with-cloudy-sky-surface.jpg",
-         label: "Hiking",
+         label: "hiking",
          icon: GiHiking,
        },
        {
          image: "https://i.ibb.co/LJ9J44y/mirpur-stadium.jpg",
-         label: "Sports",
+         label: "sports",
          icon: MdSportsCricket,
        },
        {
          image:
            "https://i.ibb.co/H2PnTZf/ashraful-pranto-s-Z90-UEv0-CHw-unsplash-1.jpg",
-         label: "Walking",
+         label: "walking",
          icon: BsPersonWalking,
        },
        {
          image: "https://i.ibb.co/xYm9nHf/amazing-bengal-tiger-nature.jpg",
-         label: "WildLIfe",
+         label: "wildlife",
          icon: GiCircleForest,
        },
        {
          image: "https://i.ibb.co/vdFvFz4/parasallingcox-sbazar.jpg",
-         label: "Air RIdes",
+         label: "airRides",
          icon: GiParachute,
        },
      ];

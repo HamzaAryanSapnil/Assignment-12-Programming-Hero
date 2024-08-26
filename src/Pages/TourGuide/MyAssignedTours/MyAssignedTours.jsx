@@ -4,6 +4,8 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import CommonBtn from "../../../Components/Buttons/CommonBtn";
 
 
 const MyAssignedTours = () => {
@@ -53,7 +55,18 @@ const MyAssignedTours = () => {
             console.log(err);
           });
     }
-
+      if (my_assigned_tours.length === 0) {
+        return (
+          <div className="flex flex-col gap-10 justify-center items-center h-screen">
+            <h1 className="text-4xl font-bold">
+              Currently you don&apos;t have any assigned tours!
+            </h1>
+            <Link to="/">
+              <CommonBtn text="Go To Home" />
+            </Link>
+          </div>
+        );
+      }
     return (
       <div className="overflow-x-auto">
         <table className="table">

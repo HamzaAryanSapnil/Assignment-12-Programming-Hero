@@ -1,8 +1,6 @@
-
-import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-
-const Sidebar_Items = ({ label, address, icon: Icon }) => {
+import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
+const MenuNav = ({ label, address, icon: Icon }) => {
   return (
     <NavLink
       to={address}
@@ -13,17 +11,16 @@ const Sidebar_Items = ({ label, address, icon: Icon }) => {
         }`
       }
     >
-      <Icon className="w-5 h-5" />
+      <Icon className="w-7 h-7" />
 
       <span className="mx-4 font-medium">{label}</span>
     </NavLink>
   );
 };
 
-Sidebar_Items.propTypes = {
+MenuNav.propTypes = {
   label: PropTypes.string,
   address: PropTypes.string,
   icon: PropTypes.elementType,
 };
-
-export default Sidebar_Items;
+export default MenuNav;

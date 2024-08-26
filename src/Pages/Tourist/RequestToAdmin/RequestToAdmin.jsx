@@ -58,7 +58,7 @@ const RequestToAdmin = () => {
             <button
               disabled
               onClick={handleRequestTourGuide}
-              className="btn btn-primary mx-4"
+              className="btn  mx-4 btn-outline text-black"
             >
               Requesting To Admin
             </button>
@@ -67,7 +67,7 @@ const RequestToAdmin = () => {
           <div>
             <button
               onClick={handleRequestTourGuide}
-              className="btn btn-primary mx-4"
+              className="btn  mx-4 btn-outline text-black"
             >
               Requesting To Admin
             </button>

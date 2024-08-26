@@ -1,8 +1,26 @@
 import PropTypes from 'prop-types'
+import queryString from "query-string";
+import { useNavigate } from "react-router-dom";
 
-const Tour_Category_Card = ({image, label, icon: Icon}) => {
-    return (
-      <div className="card w-full md:w-96 bg-base-100 shadow-xl p-2  h-56 md:h-64 xl:h-64">
+const Tour_Category_Card = ({ image, label, icon: Icon }) => {
+  const navigate = useNavigate();
+  console.log(label);
+  
+  const handleClick = () => {
+    let currentQuery = { tourType: label };
+    const url = queryString.stringifyUrl({
+      url: "/allPackages",
+      query: currentQuery,
+    });
+    console.log(url);
+    navigate(url);
+    
+  }
+  return (
+      
+      <div
+        onClick={handleClick}
+        className="card w-full md:w-96 bg-base-100 shadow-xl p-2  h-56 md:h-64 xl:h-64">
         <figure>
           <img
             src={

@@ -60,6 +60,20 @@ const AuthProvider = ({ children }) => {
 
 
   // save user to mongodb
+  const saveUser = async (user) => {
+    const userInfo = {
+      displayName: user?.displayName,
+      photoURL: user?.photoURL,
+      email: user?.email,
+      role: "user",
+      status: "verified",
+    };
+    // console.log("user info from auth provider: ", {
+    //   userInfo
+    // });
+    const { data } = await axiosPublic.put("/user", userInfo);
+    return data 
+  }
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -70,9 +84,12 @@ const AuthProvider = ({ children }) => {
           console.log(res?.data);
           if (res?.data?.token) {
             localStorage.setItem("access-token", res?.data?.token);
-            setLoading(false);
+            
           }
         });
+        
+        saveUser(currentUser)
+        setLoading(false);
       } else {
         localStorage.removeItem("access-token");
         setLoading(false);

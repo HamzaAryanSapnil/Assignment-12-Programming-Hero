@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types'
-const CommonBtn = ({text}) => {
+import { FaSpinner } from "react-icons/fa6";
+const CommonBtn = ({text, loading}) => {
     return (
       <button className="btn btn-outline rounded-full font-libre-franklin  font-medium
        text-sm md:text-lg  text-vdo-btn ">
         {" "}
-        {text}
+        {loading ? <FaSpinner className='animate-spin' ></FaSpinner> : text }
       </button>
     );
 };
 CommonBtn.propTypes = {
-    text: PropTypes.string
+  text: PropTypes.string,
+  loading:PropTypes.bool,
 }
 export default CommonBtn;

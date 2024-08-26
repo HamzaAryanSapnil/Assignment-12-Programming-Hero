@@ -6,13 +6,18 @@ import Tour_Category_Card from "./Tour_Category_Card";
 import useCategoryData from "../../../Hooks/useCategoryData";
 
 const Tour_Category = () => {
-  const [categoryData] = useCategoryData();
+  const [categories] = useCategoryData();
   
   return (
-    <Container className="" >
+    <Container className="">
       <div className="flex items-center justify-between overflow-x-auto p-3 my-10 gap-6">
-        {categoryData.map((category, index) => (
-          <Tour_Category_Card key={index} image={category.image} label={category.label} icon={category.icon} />
+        {categories.map((category, index) => (
+          <Tour_Category_Card
+            key={index}
+            image={category.image}
+            label={category.label}
+            icon={category.icon}
+          />
         ))}
       </div>
     </Container>

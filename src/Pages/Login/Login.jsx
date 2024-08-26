@@ -9,18 +9,18 @@ import { Helmet } from "react-helmet";
 import { HiEyeOff } from "react-icons/hi";
 import { HiEye } from "react-icons/hi";
 import Swal from "sweetalert2";
+import { PiSpinnerLight } from "react-icons/pi";
 // import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Login = () => {
   const [showPass, setShowPass] = useState(true);
   const [loginError, setLoginError] = useState("");
-  const { logIn, googleLogin, githubLogin } = useContext(AuthContext);
+  const { logIn, googleLogin, githubLogin, loading, setLoading } =
+    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  const axiosPublic = useAxiosPublic();
-  console.log(from);
+  // console.log(from);
 
   const {
     register,
@@ -36,64 +36,58 @@ const Login = () => {
   if (errors?.password) {
     toast.error(errors.password?.message);
   }
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    // console.log(data);
     const { email, password } = data;
-    logIn(email, password)
-      .then((result) => {
-        setLoginError("");
-        console.log("Login", result);
-        navigate(from, { replace: true });
-        Swal.fire({
-          title: result?.user?.displayName || "Sweet!",
-          text: "User Login Successfully",
-          imageUrl: result?.user?.photoURL || "https://unsplash.it/400/200",
-          imageWidth: 400,
-          imageHeight: 200,
-          imageAlt: "Custom image",
-          imageClass: "rounded-circle",
-        });
-      })
-      .catch((error) => {
-        setLoginError(error.message);
-        toast.error(error.message);
-        console.log(error);
+    try {
+      const result = await logIn(email, password);
+      setLoginError("");
+
+      navigate(from, { replace: true });
+      Swal.fire({
+        title: result?.user?.displayName || "Sweet!",
+        text: "User Login Successfully",
+        imageUrl: result?.user?.photoURL || "https://unsplash.it/400/200",
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+        imageClass: "rounded-circle",
       });
+      setLoading(false);
+    } catch (error) {
+      setLoginError(error.message);
+      toast.error(error.message);
+      console.error(error);
+      setLoading(false);
+    }
   };
 
-  const handleGoogleLogin = () => {
-    googleLogin()
-      .then((result) => {
-        const userInfo = {
-          displayName: result?.user?.displayName,
-          email: result?.user?.email,
-          photoURL: result?.user?.photoURL,
-          status: "verified",
-          role: "user",
-        };
+  const handleGoogleLogin = async () => {
+    document.getElementById("googleLoginBtn").classList.add("animate-spin");
+    try {
+      const { user } = await googleLogin();
 
-        axiosPublic
-          .post("/users", userInfo)
-          .then((res) => {
-            navigate(from, { replace: true });
-            console.log(res.data);
-              Swal.fire({
-                title: result?.user?.displayName || "Sweet!",
-                text:
-                  `${result?.user?.displayName} Login Successfully` ||
-                  "User Login Successfully",
-                imageUrl:
-                  result?.user?.photoURL ||
-                  "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
-                imageWidth: 400,
-                imageHeight: 200,
-                imageAlt: "Custom image",
-                imageClass: "rounded-circle",
-              });
-          })
-          .catch((err) => console.error(err));
-      })
-      .catch((error) => console.log(error));
+      navigate(from, { replace: true });
+      Swal.fire({
+        title: user?.displayName || "Sweet!",
+        text:
+          `${user?.displayName} Login Successfully` ||
+          "User Login Successfully",
+        imageUrl:
+          user?.photoURL ||
+          "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+        imageClass: "rounded-circle",
+      });
+      toast.success("Signup Successful");
+    } catch (error) {
+      setLoginError(error.message);
+      toast.error(error.message);
+      console.error(error);
+      setLoading(false);
+    }
   };
   const handleGithubLogin = () => {
     githubLogin()
@@ -185,8 +179,15 @@ const Login = () => {
                 )}
               </div>
               <div className="form-control mt-6">
-                <button className="  text-signBtn btn btn-outline animate__pulse ">
-                  Login
+                <button
+                  disabled={loading}
+                  className="  text-signBtn btn btn-outline animate__pulse "
+                >
+                  {loading ? (
+                    <PiSpinnerLight className="animate-spin flex justify-center items-center w-full h-8 " />
+                  ) : (
+                    "Log in"
+                  )}
                 </button>
               </div>
             </form>
@@ -201,8 +202,9 @@ const Login = () => {
                 >
                   <i>
                     <img
+                      id="googleLoginBtn"
                       src={googleIcon}
-                      className="w-10 h-10"
+                      className={`w-10 h-10 `}
                       alt=""
                     />
                   </i>

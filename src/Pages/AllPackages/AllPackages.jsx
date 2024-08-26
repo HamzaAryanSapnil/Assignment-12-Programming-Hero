@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useOurPackages from "../../Hooks/useOurPackages";
 import Banner from "../Home/Banner/Banner";
 import OurPackagesCards from "../../Components/OurPackagesCards/OurPackagesCards";
+import { useSearchParams } from "react-router-dom";
+import EmptyState from "../Shared/EmptyState";
+import useOurPackages from "../../Hooks/useOurPackages";
 
 const AllPackages = () => {
   const [wishListPackageIds, setWishListPackageIds] = useState([]);
-  const [ourPackages, loading, refetch] = useOurPackages();
+  // eslint-disable-next-line no-unused-vars
+  const [params, setParams] = useSearchParams()
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const tourType = params.get("tourType");
+  const [ourPackages, loading, refetch] = useOurPackages(tourType);
+  console.log("Our packages from all packages page: ", ourPackages);
+  
+  
+  console.log("category from query: ", tourType);
+  
+
   useEffect(() => {
     axiosSecure.get(`/wishList?email=${user?.email}`).then((data) => {
       const wishlistData = data.data;
@@ -23,6 +34,18 @@ const AllPackages = () => {
       <div className="flex justify-center items-center h-screen">
         <span className="loading loading-spinner loading-lg"></span>
       </div>
+    );
+  }
+
+  if (ourPackages.length === 0 || ourPackages.length === null) {
+    return (
+      <>
+        <EmptyState
+          label={tourType}
+          address={"/"}
+          message={"No Data Available"}
+        ></EmptyState>
+      </>
     );
   }
 
