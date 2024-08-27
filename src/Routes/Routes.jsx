@@ -22,13 +22,14 @@ import MyAssignedTours from "../Pages/TourGuide/MyAssignedTours/MyAssignedTours"
 import MyBookings from "../Pages/Tourist/MyBookings/MyBookings";
 import RequestToAdmin from "../Pages/Tourist/RequestToAdmin/RequestToAdmin";
 import Payment from "../Pages/Package_Details/Payment";
-import Blogs from "../Pages/Blogs/Blogs";
+// import Blogs from "../Pages/Blogs/Blogs";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import Tourist_Story_Sec from "../Pages/Home/Tourist_Story_Section/Tourist_Story_Sec";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import ProfilePage from "../Pages/Common/Profile/ProfilePage";
 import StoryDetails from "../Pages/Home/Tourist_Story_Section/StoryDetails";
+import All_Stories from "../Pages/All_Story/All_Stories";
 
 export const router = createBrowserRouter([
   {
@@ -57,8 +58,8 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/blogs",
-        element: <Blogs />,
+        path: "/all_story",
+        element: <All_Stories />,
       },
       {
         path: "/about_us",

@@ -14,6 +14,7 @@ import useAuth from "../../../Hooks/useAuth";
 import { useState } from "react";
 import Container from "../../Shared/Container";
 import { Link } from "react-router-dom";
+import CommonBtn from "../../../Components/Buttons/CommonBtn";
 const ReviewData = () => {
   const { user } = useAuth();
   const [reviewText, setReviewText] = useState("");
@@ -198,6 +199,11 @@ const ReviewData = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+        <div className="flex justify-center items-center w-full my-5" >
+          <Link to={"/all_story"} >
+            <CommonBtn text={"All Stories"} />
+          </Link>
+        </div>
       </div>
     </Container>
   );

@@ -24,13 +24,13 @@ const Navbar = () => {
         <NavLink to="/allPackages">All Packages</NavLink>
       </li>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
-        <NavLink to="/blogs">Blogs</NavLink>
+        <NavLink to="/all_story">All Stories</NavLink>
       </li>
 
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/about_us">About Us</NavLink>
       </li>
-      
+
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/contact_us"> Contact Us</NavLink>
       </li>
