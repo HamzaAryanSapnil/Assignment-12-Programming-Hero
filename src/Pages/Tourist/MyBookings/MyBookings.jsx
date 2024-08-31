@@ -77,7 +77,7 @@ const MyBookings = () => {
             <th> Price And Date </th>
             <th>Status</th>
             <th>Action</th>
-            <th>Your Exp</th>
+      
           </tr>
         </thead>
         <tbody>

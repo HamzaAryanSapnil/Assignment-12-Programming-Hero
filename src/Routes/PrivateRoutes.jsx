@@ -10,8 +10,9 @@ const PrivateRoutes = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex flex-col justify-center items-center min-h-screen">
         <TbLoader className="animate-spin h-24 w-24"></TbLoader>
+        <p>Please reload if still loading</p>
       </div>
     );
   }

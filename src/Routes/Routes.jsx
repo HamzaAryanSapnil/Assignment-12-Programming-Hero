@@ -25,11 +25,11 @@ import Payment from "../Pages/Package_Details/Payment";
 // import Blogs from "../Pages/Blogs/Blogs";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import ContactUs from "../Pages/ContactUs/ContactUs";
-import Tourist_Story_Sec from "../Pages/Home/Tourist_Story_Section/Tourist_Story_Sec";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import ProfilePage from "../Pages/Common/Profile/ProfilePage";
-import StoryDetails from "../Pages/Home/Tourist_Story_Section/StoryDetails";
 import All_Stories from "../Pages/All_Story/All_Stories";
+import Tourist_Story_Sec_Review_Form from "../Pages/Home/Tourist_Story_Section/Tourist_Story_Sec_Review_Form";
+import StoryDetails from "../Pages/Home/Tourist_Story_Section/StoryDetails";
 
 export const router = createBrowserRouter([
   {
@@ -79,10 +79,10 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/tourist_story/:id",
-        element: <Tourist_Story_Sec />,
+        path: "/tourist_story_form",
+        element: <Tourist_Story_Sec_Review_Form />,
         // loader: ({ params }) =>
-        //   fetch(`http://localhost:3000/tour_story/${params.id}`),
+        //   fetch(`https://assignment-12-tourist-guide-server-side.vercel.app/tour_story/${params.id}`),
       },
     ],
   },

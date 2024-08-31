@@ -1,43 +1,23 @@
+import { useNavigate,  } from "react-router-dom";
 
-import { useNavigate, useParams } from "react-router-dom";
-import useStoryData from "../../../Hooks/useStoryData";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 import CommonBtn from "../../../Components/Buttons/CommonBtn";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Container from "../../Shared/Container";
+import { imageUpload } from "../../../Api";
 
-const Tourist_Story_Sec = () => {
-  const { id } = useParams();
+const Tourist_Story_Sec_Review_Form = () => {
+
   const { user } = useAuth();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
 
-  const [tourStory, refetch, loading, error] = useStoryData(id);
-  console.log(tourStory);
-  // console.log(loading);
-  // console.error(error);
-  // console.log(refetch);
 
-  if (error) {
-    return Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Something went wrong!",
-    });
-  }
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        {" "}
-        <span className="loading loading-spinner loading-lg"></span>{" "}
-      </div>
-    );
-  }
+  
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
     const form = e.target;
 
@@ -45,52 +25,49 @@ const Tourist_Story_Sec = () => {
     const package_image = form.package_image.value;
     const tourist_name = form.tourist_name.value;
     const tourist_email = form.tourist_email.value;
-    const tourist_photo = form.tourist_photo.value;
+    const image = form.image.files[0];
     const tourGuideName = form.tourGuideName.value;
     const tourGuideEmail = form.tourGuideEmail.value;
     const storyDetailsReview = form.storyDetailsReview.value;
+
+     
+
     const storyDetails = {
       title,
       package_image,
       tourist_name,
       tourist_email,
-      tourist_photo,
+      
       tourGuideName,
       tourGuideEmail,
       storyDetailsReview,
     };
     console.log(storyDetails);
 
- try {
-     const { data } = await axiosSecure.post(
-       `/tour_story`,
-       storyDetails
-     );
-     if (data.insertedId) {
-       Swal.fire({
-         position: "top-end",
-         icon: "success",
-         title: "Success",
-         text: "Story added successfully",
-         showConfirmButton: false,
-         timer: 1500,
-       });
-   }
-   refetch();
-   navigate("/");
-   
- } catch (error) {
-   console.error(error);
-   Swal.fire({
-     icon: "error",
-     title: "Oops...",
-     text: "Something went wrong!",
-   });
-  
- }
+    try {
+      const image_url = await imageUpload(image);
 
+      const { data } = await axiosSecure.post(`/tour_story`, {...storyDetails, image_url});
+      if (data.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Success",
+          text: "Story added successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
 
-    
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+    }
   };
   return (
     <Container>
@@ -99,11 +76,8 @@ const Tourist_Story_Sec = () => {
           <div
             className="hero w-4/12"
             style={{
-              backgroundImage: `url(${
-                tourStory?.image
-                  ? tourStory?.image
-                  : "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)"
-              })`,
+              backgroundImage:
+                "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
             }}
           >
             <div className="hero-overlay bg-opacity-60"></div>
@@ -129,22 +103,24 @@ const Tourist_Story_Sec = () => {
                 <input
                   name="title"
                   type="text"
-                  value={tourStory?.title}
+                  placeholder="Please Enter the Title Of Your Tour Package which you want to review"
                   className="input input-bordered"
                   required
                 />
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Package&apos;s Image Url</span>
+                  <span className="label-text">
+                    Please Give us a single Photo From Your Tour
+                  </span>
                 </label>
                 <input
-                  name="package_image"
-                  type="text"
-                  value={tourStory?.image}
-                  className="input input-bordered"
-                  required
+                 
+                  name="image"
+                  type="file"
+                  className='file-input w-full' 
                 />
+               
               </div>
               <div className="form-control">
                 <label className="label">
@@ -156,6 +132,7 @@ const Tourist_Story_Sec = () => {
                   value={user?.displayName}
                   className="input input-bordered"
                   required
+                  readOnly
                 />
               </div>
               <div className="form-control">
@@ -168,6 +145,7 @@ const Tourist_Story_Sec = () => {
                   value={user?.email}
                   className="input input-bordered"
                   required
+                  readOnly
                 />
               </div>
               <div className="form-control">
@@ -184,6 +162,7 @@ const Tourist_Story_Sec = () => {
                   }
                   className="input input-bordered"
                   required
+                  readOnly
                 />
               </div>
               <div className="form-control">
@@ -193,7 +172,7 @@ const Tourist_Story_Sec = () => {
                 <input
                   name="tourGuideName"
                   type="text"
-                  value={tourStory?.tourGuideName}
+                  placeholder="Please Enter the tour guide name of your tour package"
                   className="input input-bordered"
                   required
                 />
@@ -205,7 +184,7 @@ const Tourist_Story_Sec = () => {
                 <input
                   name="tourGuideEmail"
                   type="email"
-                  value={tourStory?.tourGuideEmail}
+                  placeholder="Enter the email of tour guide"
                   className="input input-bordered"
                   required
                 />
@@ -234,5 +213,4 @@ const Tourist_Story_Sec = () => {
   );
 };
 
-
-export default Tourist_Story_Sec;
+export default Tourist_Story_Sec_Review_Form;
