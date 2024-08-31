@@ -30,6 +30,7 @@ import ProfilePage from "../Pages/Common/Profile/ProfilePage";
 import All_Stories from "../Pages/All_Story/All_Stories";
 import Tourist_Story_Sec_Review_Form from "../Pages/Home/Tourist_Story_Section/Tourist_Story_Sec_Review_Form";
 import StoryDetails from "../Pages/Home/Tourist_Story_Section/StoryDetails";
+import Tour_Guide_Details from "../Pages/Tour_Guide_Details/Tour_Guide_Details";
 
 export const router = createBrowserRouter([
   {
@@ -82,7 +83,11 @@ export const router = createBrowserRouter([
         path: "/tourist_story_form",
         element: <Tourist_Story_Sec_Review_Form />,
         // loader: ({ params }) =>
-        //   fetch(`https://assignment-12-tourist-guide-server-side.vercel.app/tour_story/${params.id}`),
+        //   fetch(`http://localhost:3000/tour_story/${params.id}`),
+      },
+      {
+        path: "tour_guide_details/:id",
+        element: <Tour_Guide_Details />,
       },
     ],
   },

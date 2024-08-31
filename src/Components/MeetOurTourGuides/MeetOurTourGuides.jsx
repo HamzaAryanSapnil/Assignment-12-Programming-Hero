@@ -3,6 +3,7 @@ import MeetTourGuidesRow from "./MeetTourGuidesRow";
 
 const MeetOurTourGuides = () => {
   const [tourGuides, refetch, isLoading] = useLoadAllTourGuides();
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -20,6 +21,7 @@ const MeetOurTourGuides = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Status</th>
+            <th>View Details</th>
           </tr>
         </thead>
         <tbody>
@@ -29,6 +31,7 @@ const MeetOurTourGuides = () => {
               tourGuide={tourGuide}
               index={index}
               refetch={refetch}
+              // handleTourGuideId={handleTourGuideId}
             ></MeetTourGuidesRow>
           ))}
         </tbody>
