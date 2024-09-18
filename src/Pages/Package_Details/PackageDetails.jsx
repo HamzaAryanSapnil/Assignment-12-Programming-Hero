@@ -12,10 +12,8 @@ const PackageDetails = () => {
   const [tourGuides, isLoading] = useLoadAllTourGuides();
   const { id } = useParams();
   console.log("all tour guides from package details: ", tourGuides);
- 
-  
-  
-
+  const [selectGuideErr, setSelectGuideErr] = useState("");
+  const [dateError, setDateError] = useState("");
 
   const navigate = useNavigate();
 
@@ -24,15 +22,9 @@ const PackageDetails = () => {
   const { image, price, title, tourType, from, to } = packageDetails;
   // console.log(packageDetails, to, image, price, title, loading, reload);
 
-
-  
-  
-  
   //? react date picker
-   const [dateRange, setDateRange] = useState([null, null]);
+  const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-
-
 
   const { user } = useAuth();
 
@@ -41,20 +33,38 @@ const PackageDetails = () => {
     to: new Date(endDate).toLocaleDateString("en-GB"),
   };
 
-  
   // const [startDate, setStartDate] = useState(new Date());
   // const [startDate, setStartDate] = useState(new Date());
   const handleSubmit = (event) => {
     event.preventDefault();
+    setSelectGuideErr("");
+    setDateError("");
+
     const form = event.target;
     const name = form.name.value;
     const email = form.email.value;
     const date = givenDate;
     const price = form.price.value;
     const tourGuideName = form.tourGuideName.value;
+
+    if (!startDate || !endDate) {
+      setDateError("Please select a valid date range.");
+      return;
+    }
+
+    if (tourGuideName === "Please Select Your Tour Guide") {
+      setSelectGuideErr("Please select a tour guide.");
+      return;
+    }
+
     const selectedTourGuide = tourGuides.find(
       (tourGuide) => tourGuide.displayName === tourGuideName
     );
+
+    if (!selectedTourGuide) {
+      setSelectGuideErr("Invalid tour guide selected.");
+      return;
+    }
 
     const {
       _id,
@@ -62,8 +72,10 @@ const PackageDetails = () => {
       email: tourGuideEmail,
       ...otherProps
     } = selectedTourGuide;
-    console.log("Selected Tour Guide from package details: ",selectedTourGuide);
-    
+    console.log(
+      "Selected Tour Guide from package details: ",
+      selectedTourGuide
+    );
 
     console.log(name, email, date, price, tourGuideName, tourGuideEmail, _id);
     const bookingData = {
@@ -84,7 +96,7 @@ const PackageDetails = () => {
     };
 
     console.log(bookingData);
-    
+
     navigate("/dashboard/payment", { state: bookingData });
   };
   if (isLoading && loading) {
@@ -198,6 +210,7 @@ const PackageDetails = () => {
                       isClearable={true}
                       withPortal
                     />
+                    {dateError && <p className="text-red-500">{dateError}</p>}
                   </label>
                 </div>
                 <div className="form-control">
@@ -223,10 +236,18 @@ const PackageDetails = () => {
                         </option>
                       ))}
                     </select>
+                    {selectGuideErr && (
+                      <p className="text-red-500">{selectGuideErr}</p>
+                    )}
                   </label>
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-outline text-black">Book Now</button>
+                  <button
+                    className="btn btn-outline text-black"
+                    
+                  >
+                    Book Now
+                  </button>
                 </div>
               </form>
             </div>
