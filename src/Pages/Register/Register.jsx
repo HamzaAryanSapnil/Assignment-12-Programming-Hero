@@ -4,16 +4,17 @@ import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
-// import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Container from "../Shared/Container";
 import { imageUpload } from "../../Api";
 const Register = () => {
   const [showPass, setShowPass] = useState(true);
-  const { createUser, updateUserProfile, loading, setLoading } = useAuth();
+  const { createUser, updateUserProfile, loading, setLoading,  } =
+    useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  // const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -30,8 +31,11 @@ const Register = () => {
     const password = data?.password;
     const name = data?.firstName + " " + data?.lastName;
     const image = data?.image[0];
-    const formData = new FormData();
-    formData.append("image", image);
+    // const formData = new FormData();
+    // formData.append("image", image);
+    console.log(image);
+    console.log(import.meta.env.VITE_IMAGEBB_API_KEY);
+    
 
     try {
       // 1 upload image and get image url
@@ -40,32 +44,36 @@ const Register = () => {
       console.log(image_url);
 
       const result = await createUser(email, password);
+      
       console.log(result);
-
+      
+      // console.log(result?.user?.displayName);
       // save userInfo in firebase
       await updateUserProfile(name, image_url);
-      // const userInfo = {
-      //   displayName: name,
-      //   photoURL: photoURL,
-      //   email: email,
-      //   role: "user",
-      //   status: "verified",
-      // };
-      // const { data: userDataInfo } = await axiosPublic.post("/users", userInfo);
-      // if (userDataInfo.insertedId) {
-      //   navigate(from, { replace: true });
-      //   Swal.fire({
-      //     title: `${name} Created Successfully`,
-      //     icon: "success",
-      //   });
-      //   
-      // }
 
-      navigate(from, { replace: true });
-      Swal.fire({
-        title: `${name} Created Successfully`,
-        icon: "success",
-      });
+      const userInfo = {
+        displayName: name,
+        photoURL: image_url,
+        email: email,
+        role: "user",
+        status: "verified",
+      };
+      const { data: userDataInfo } = await axiosPublic.put("/user", userInfo);
+      if (userDataInfo?.upsertedCount > 0) {
+        navigate(from, { replace: true });
+        Swal.fire({
+          title: `${name} Created Successfully`,
+          icon: "success",
+        });
+
+      }
+      console.log(userDataInfo);
+
+      // navigate(from, { replace: true });
+      // Swal.fire({
+      //   title: `${name} Created Successfully`,
+      //   icon: "success",
+      // });
       reset();
     } catch (error) {
       console.error(error);
@@ -112,6 +120,8 @@ const Register = () => {
     //   .catch((error) => {
     //     console.error(error);
     //   });
+  
+  
   };
 
   return (

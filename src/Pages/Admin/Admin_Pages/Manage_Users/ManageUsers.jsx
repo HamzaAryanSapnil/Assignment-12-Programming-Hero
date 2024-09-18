@@ -9,7 +9,9 @@ import { TbLoader } from "react-icons/tb";
 
 const ManageUsers = () => {
   const [users, isLoading, refetch] = useLoadUsers();
-  const {user: loggedInUser} = useAuth();
+  const { user: loggedInUser } = useAuth();
+  console.log(users);
+  
   
     // i have to make axiosSecure here to delete user
     

@@ -61,6 +61,11 @@ const AuthProvider = ({ children }) => {
 
   // save user to mongodb
   const saveUser = async (user) => {
+    console.log("users from save user in auth provider: ", user, {
+      displayName: user?.displayName,
+      photoURL: user?.photoURL,
+    });
+    
     const userInfo = {
       displayName: user?.displayName,
       photoURL: user?.photoURL,
@@ -72,6 +77,8 @@ const AuthProvider = ({ children }) => {
     //   userInfo
     // });
     const { data } = await axiosPublic.put("/user", userInfo);
+    console.log(data);
+    
     return data 
   }
 
@@ -86,9 +93,10 @@ const AuthProvider = ({ children }) => {
             localStorage.setItem("access-token", res?.data?.token);
             
           }
+       
         });
         
-        saveUser(currentUser)
+        
         setLoading(false);
       } else {
         localStorage.removeItem("access-token");
@@ -111,6 +119,7 @@ const AuthProvider = ({ children }) => {
     logOut,
     loading,
     setLoading,
+    saveUser
   };
 
   return (
