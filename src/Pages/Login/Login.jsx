@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import { PiSpinnerLight } from "react-icons/pi";
 // import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Login = () => {
   const [showPass, setShowPass] = useState(true);
   const [loginError, setLoginError] = useState("");
@@ -20,6 +21,7 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
+   const axiosPublic = useAxiosPublic();
   // console.log(from);
 
   const {
@@ -41,7 +43,10 @@ const Login = () => {
     const { email, password } = data;
     try {
       const result = await logIn(email, password);
+      console.log(result);
+      
       setLoginError("");
+      //  const { data: userDataInfo } = await axiosPublic.put("/user", userInfo);
 
       navigate(from, { replace: true });
       Swal.fire({
@@ -66,6 +71,16 @@ const Login = () => {
     document.getElementById("googleLoginBtn").classList.add("animate-spin");
     try {
       const { user } = await googleLogin();
+      const userInfo = {
+        displayName: user?.displayName,
+        photoURL: user?.photoURL,
+        email: user?.email,
+        role: "user",
+        status: "verified",
+      };
+      const { data: userDataInfo } = await axiosPublic.put("/user", userInfo);
+      console.log(userDataInfo);
+      
 
       navigate(from, { replace: true });
       Swal.fire({
