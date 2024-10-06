@@ -83,7 +83,7 @@ export const router = createBrowserRouter([
         path: "/tourist_story_form",
         element: <Tourist_Story_Sec_Review_Form />,
         // loader: ({ params }) =>
-        //   fetch(`http://localhost:3000/tour_story/${params.id}`),
+        //   fetch(`https://assignment-12-tourist-guide-server-side.vercel.app/tour_story/${params.id}`),
       },
       {
         path: "tour_guide_details/:id",
