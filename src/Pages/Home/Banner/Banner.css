@@ -1,0 +1,25 @@
+/* Banner.css */
+
+/* Ensure the carousel container takes full width */
+.carousel-container {
+  width: 100%;
+}
+
+/* Optional: Customize the Carousel arrows and dots if needed */
+
+/* Example: Customize arrow colors */
+.carousel .control-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Example: Customize dot colors */
+.carousel .dot {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.carousel .dot.selected,
+.carousel .dot:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Optional: Add media queries or additional styles as needed */

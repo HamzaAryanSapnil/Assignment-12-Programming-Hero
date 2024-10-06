@@ -15,7 +15,7 @@ const TourismSection = () => {
   const auth = useAuth();
   const { user } = auth;
   const axiosSecure = useAxiosSecure();
-  const [ourPackages, loading, refetch] = useOurPackages("");
+  const [ourPackages, loading, refetch] = useOurPackages();
   console.log("Our packages from Home Page Tourism Section: ", ourPackages);
   
 

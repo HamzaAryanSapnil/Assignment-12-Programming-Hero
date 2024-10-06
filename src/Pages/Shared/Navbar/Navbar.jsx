@@ -1,9 +1,16 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import { FaSearch } from "react-icons/fa";
+import { useState } from "react";
+import queryString from "query-string";
+import useOurPackages from "../../../Hooks/useOurPackages";
 
 const Navbar = () => {
+  const [search, setSearch] = useState("");
   const { user, logOut } = useAuth();
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
+  const [ourPackages, loading, refetch] = useOurPackages();
 
   const handleLogout = () => {
     logOut()
@@ -15,6 +22,22 @@ const Navbar = () => {
         console.log(error);
       });
   };
+
+    const handleSearch = () => {
+
+      let currentQuery = { title: search };
+      const url = queryString.stringifyUrl({
+        url: "/allPackages",
+        query: currentQuery,
+      });
+      console.log(url);
+      navigate(url);
+      refetch();
+      
+    };
+
+
+
   const navLinks = (
     <>
       <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
@@ -27,12 +50,20 @@ const Navbar = () => {
         <NavLink to="/all_story">All Stories</NavLink>
       </li>
 
-      <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
-        <NavLink to="/about_us">About Us</NavLink>
-      </li>
-
-      <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
-        <NavLink to="/contact_us"> Contact Us</NavLink>
+      <li className="w-56">
+        <div className=" group hover:bg-white flex items-center bg-white rounded-full text-black w-64 p-2">
+          <input
+            type="text"
+            className="w-full group  transition-all duration-500 outline-none font-semibold bg-transparent border-none"
+            placeholder="Search"
+            value={search}
+            onChange={(e) => setSearch(e?.target?.value)}
+          />
+          <FaSearch
+            className="ml-2"
+            onClick={handleSearch}
+          />
+        </div>
       </li>
       {/* <li className=" hover:transition-all hover:duration-300 hover:bg-signBtn hover:text-white hover:rounded-lg hover:shadow-lg hover:shadow-signBtn hover:font-manrope hover:font-medium">
         <NavLink to="/admin">Admin</NavLink>
@@ -119,11 +150,10 @@ const Navbar = () => {
                 </li>
 
                 <li className="text-black">
-                  <button onClick={handleLogout}  >Logout</button>
+                  <button onClick={handleLogout}>Logout</button>
                 </li>
               </ul>
             </div>
-
           </div>
         ) : (
           <div className="navbar-end">

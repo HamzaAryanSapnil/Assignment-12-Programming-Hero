@@ -14,11 +14,8 @@ const AllPackages = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const tourType = params.get("tourType");
-  const [ourPackages, loading, refetch] = useOurPackages(tourType);
-  console.log("Our packages from all packages page: ", ourPackages);
-  
-  
-  console.log("category from query: ", tourType);
+    const title = params.get("title"); 
+  const [ourPackages, loading, refetch] = useOurPackages(tourType, title);
   
 
   useEffect(() => {
