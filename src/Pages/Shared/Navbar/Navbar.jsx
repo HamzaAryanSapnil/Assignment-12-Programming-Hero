@@ -55,7 +55,7 @@ const Navbar = () => {
           <input
             type="text"
             className="w-full group  transition-all duration-500 outline-none font-semibold bg-transparent border-none"
-            placeholder="Search"
+            placeholder="Search by title of package"
             value={search}
             onChange={(e) => setSearch(e?.target?.value)}
           />
